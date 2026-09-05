@@ -35,3 +35,9 @@ In order: the hero, a trust strip, the four age bands, the eight things parents 
 ## Notes
 
 The example child, parent, and every clinical detail are made up, and the page says so.
+
+## Stakeholder brief
+
+`brief.html` is a one-page product brief for sharing with stakeholders: overview, the problem, target audience, main value, competitive edge, business model, and messaging. It carries the same identity as the site and has print styles, so it exports cleanly to PDF from the browser.
+
+Figures in it that are assumptions rather than research are listed explicitly at the end of the page.

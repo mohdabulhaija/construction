@@ -1,0 +1,366 @@
+<title>Bedside Product Brief</title>
+<style>
+:root{
+  --ground:#F0F1F9; --sheet:#FFFFFF; --sheet-2:#F7F7FC;
+  --ink:#191B38; --ink-2:#4A4D70; --muted:#737699;
+  --line:#DEDFEE; --line-2:#C4C6DE;
+  --brand:#6D28D9; --brand-2:#8B5CF6; --on-brand:#FFFFFF;
+  --brand-soft:#EEE9FD; --brand-line:#C9B8F5;
+  --hero-1:#211A4E; --hero-2:#3E2A80; --hero-ink:#FFFFFF; --hero-ink-2:#C7C0E6;
+  --hero-line:rgba(255,255,255,.16); --hero-chip:rgba(255,255,255,.10);
+  --s1:#D97706; --s2:#0F8A78; --s3:#2563EB; --s4:#D6336C;
+  --s1-soft:#FDF1E1; --s2-soft:#E2F3F0; --s3-soft:#E7EDFD; --s4-soft:#FCE9F0;
+  --good:#0F7A5F; --good-soft:#E3F2EC;
+  --warn:#B45309; --warn-soft:#FBEEDD; --warn-line:#E7C69C;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Figtree","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --r:14px;
+  --shadow:0 1px 2px rgba(25,27,56,.05), 0 8px 24px -12px rgba(25,27,56,.16);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+    --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+    --line:#2B2E45; --line-2:#3D4160;
+    --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+    --brand-soft:#241E3F; --brand-line:#4C3E85;
+    --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+    --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+    --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+    --good:#4FBF9A; --good-soft:#12291F;
+    --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+  --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+  --line:#2B2E45; --line-2:#3D4160;
+  --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+  --brand-soft:#241E3F; --brand-line:#4C3E85;
+  --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+  --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+  --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+  --good:#4FBF9A; --good-soft:#12291F;
+  --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-size:16.5px;line-height:1.58;-webkit-font-smoothing:antialiased}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;letter-spacing:-.012em}
+:focus-visible{outline:2.5px solid var(--brand);outline-offset:2px}
+
+.page{width:min(100% - 2.5rem, 56rem);margin:0 auto;padding-bottom:3.5rem}
+
+/* masthead */
+.masthead{background:linear-gradient(158deg,var(--hero-1),var(--hero-2) 70%,#4B2F94);
+  color:var(--hero-ink);border-radius:0 0 26px 26px;margin-bottom:2.5rem}
+.masthead-in{width:min(100% - 2.5rem, 56rem);margin:0 auto;padding:1.6rem 0 2.1rem;
+  display:grid;gap:1.1rem}
+.mh-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.lockup{display:flex;align-items:center;gap:.6rem}
+.mark{width:34px;height:34px;border-radius:10px;background:var(--brand-2);display:grid;place-items:center;flex:none}
+.mark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round}
+.lockup b{font-family:var(--display);font-size:1.12rem;font-weight:600;letter-spacing:-.02em;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 20;display:block;line-height:1.15}
+.lockup span{font-size:.68rem;color:var(--hero-ink-2);letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+.mh-meta{font-size:.78rem;color:var(--hero-ink-2);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.masthead h1{font-size:clamp(1.6rem,1.2rem + 1.6vw,2.2rem);color:var(--hero-ink);max-width:24ch;
+  font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 60}
+.oneline{background:var(--hero-chip);border:1px solid var(--hero-line);border-radius:var(--r);
+  padding:.95rem 1.15rem;color:var(--hero-ink);font-size:1.02rem;max-width:60ch}
+.oneline b{color:#fff;font-weight:700}
+
+/* sections */
+.sec{margin-bottom:2.25rem}
+.sec-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.9rem;
+  padding-bottom:.55rem;border-bottom:2px solid var(--line)}
+.sec-n{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:var(--brand);
+  font-variant-numeric:tabular-nums;flex:none}
+.sec-head h2{font-size:1.3rem}
+.body{display:grid;gap:.85rem;max-width:66ch}
+.body p{color:var(--ink-2)}
+.body p.lead{color:var(--ink);font-size:1.05rem}
+strong{color:var(--ink);font-weight:700}
+
+/* plain bullet list */
+.list{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.list li{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:baseline;color:var(--ink-2)}
+.list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-line);
+  transform:translateY(-2px)}
+
+/* three-up cards */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.3rem}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);
+  padding:1rem 1.05rem;display:grid;gap:.35rem;align-content:start;border-top:3px solid var(--cc)}
+.card .k{font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--cc)}
+.card b{font-size:1rem;font-weight:700;color:var(--ink);line-height:1.3}
+.card span{font-size:.92rem;color:var(--ink-2);line-height:1.5}
+.c1{--cc:var(--s1)} .c2{--cc:var(--s2)} .c3{--cc:var(--s3)} .c4{--cc:var(--s4)}
+.quad{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.quad{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){.trio{grid-template-columns:1fr}}
+@media (max-width:560px){.quad{grid-template-columns:1fr}}
+
+/* audience split */
+.aud{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.aud > div{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.05rem;
+  display:grid;gap:.3rem;align-content:start}
+.aud .k{font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.aud b{font-size:1rem;color:var(--ink)}
+.aud span{font-size:.92rem;color:var(--ink-2);line-height:1.5}
+@media (max-width:640px){.aud{grid-template-columns:1fr}}
+
+/* comparison table */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--sheet)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.94rem}
+th,td{text-align:left;padding:.8rem .95rem;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:var(--sheet-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.what{font-weight:700;color:var(--ink);white-space:nowrap}
+td.gap{color:var(--ink-2)}
+td.us{color:var(--ink);background:var(--brand-soft);font-weight:600}
+.edge{background:var(--brand-soft);border-left:3px solid var(--brand);border-radius:0 10px 10px 0;
+  padding:.9rem 1.1rem;margin-top:.85rem;color:var(--ink);font-size:.99rem;max-width:66ch}
+
+/* model */
+.model{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:center;
+  background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:1.2rem 1.3rem}
+.pricebox{display:grid;gap:.1rem;padding-right:1.4rem;border-right:1px solid var(--line)}
+.pricebox .amt{font-family:var(--display);font-size:2.5rem;font-weight:600;line-height:1;letter-spacing:-.03em;
+  color:var(--ink);font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 90}
+.pricebox .per{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.terms{display:grid;gap:.45rem}
+.terms div{display:grid;grid-template-columns:9.5rem 1fr;gap:.9rem;font-size:.95rem}
+.terms dt{color:var(--muted);font-weight:600;margin:0}
+.terms dd{margin:0;color:var(--ink)}
+@media (max-width:640px){
+  .model{grid-template-columns:1fr;gap:1rem}
+  .pricebox{padding-right:0;padding-bottom:1rem;border-right:0;border-bottom:1px solid var(--line)}
+  .terms div{grid-template-columns:1fr;gap:.05rem}
+}
+.why{margin-top:.85rem;max-width:66ch;color:var(--ink-2)}
+
+/* messaging */
+.anchor{background:linear-gradient(158deg,var(--hero-1),var(--hero-2));color:var(--hero-ink);
+  border-radius:var(--r);padding:1.5rem 1.5rem;display:grid;gap:.5rem}
+.anchor .k{font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--hero-ink-2)}
+.anchor q{font-family:var(--display);font-size:clamp(1.25rem,1rem + 1.1vw,1.7rem);font-weight:600;
+  line-height:1.2;quotes:"“" "”";font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 60}
+.anchor p{color:var(--hero-ink-2);font-size:.93rem;max-width:56ch}
+.voice{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.85rem}
+.voice span{border:1px solid var(--line-2);border-radius:999px;padding:.32rem .8rem;
+  font-size:.86rem;font-weight:600;color:var(--ink-2);background:var(--sheet)}
+
+/* open questions */
+.open{background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:var(--r);
+  padding:1.15rem 1.3rem;display:grid;gap:.6rem}
+.open b{color:var(--warn);font-size:.98rem}
+.open ol{margin:0;padding-left:1.2rem;display:grid;gap:.4rem;color:var(--ink-2);font-size:.95rem}
+.open li::marker{color:var(--warn);font-weight:700}
+
+.foot{margin-top:2.25rem;padding-top:1.1rem;border-top:1px solid var(--line);
+  font-size:.85rem;color:var(--muted);display:grid;gap:.3rem}
+
+@media print{
+  body{background:#fff;font-size:11pt}
+  .masthead{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sec{break-inside:avoid}
+  .card,.model,.anchor,.open,.tbl-scroll{break-inside:avoid}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M5 20V7.5A3.5 3.5 0 0 1 8.5 4h7A3.5 3.5 0 0 1 19 7.5V20"/><path d="M5 9h3M5 13h3M5 17h3M19 9h-3M19 13h-3M19 17h-3"/></symbol>
+</defs></svg>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="mh-top">
+      <div class="lockup">
+        <span class="mark"><svg><use href="#i-mark"/></svg></span>
+        <span><b>Bedside</b><span>Children's health</span></span>
+      </div>
+      <span class="mh-meta">Product brief &middot; September 2026</span>
+    </div>
+    <h1>Paediatric health guidance for parents.</h1>
+    <p class="oneline">A parent describes what they are seeing in their child. Within minutes they get a written report that explains what it means, what to do tonight, and <b>the exact point at which to seek care.</b> One annual fee covers every child in the household.</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- 1 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">01</span><h2>Product overview</h2></div>
+    <div class="body">
+      <p class="lead">Bedside is a subscription service for parents of children aged 0 to 15.</p>
+      <p>The parent fills in a short form: which child, what they have noticed, in their own words, and how long it has been going on. A few minutes later a report comes back with the same four parts every time.</p>
+    </div>
+    <div class="trio quad">
+      <div class="card c1"><span class="k">Part 1</span><b>What you told us</b><span>Their own words, read back, so a misunderstanding is visible immediately.</span></div>
+      <div class="card c2"><span class="k">Part 2</span><b>What it likely means</b><span>Plain language, written for that child's age.</span></div>
+      <div class="card c3"><span class="k">Part 3</span><b>What to do now</b><span>Specific actions for tonight, each with the reason.</span></div>
+      <div class="card c4"><span class="k">Part 4</span><b>When to worry</b><span>Numbered thresholds, not vague symptoms.</span></div>
+    </div>
+    <div class="body" style="margin-top:.85rem">
+      <p>Every report ends with one next step, not an upsell: book fifteen minutes with a paediatrician, included in the subscription.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">02</span><h2>The problem we solve</h2></div>
+    <div class="body">
+      <p class="lead">It is eleven at night. The child has a fever. The parent has three options and none of them work.</p>
+      <ul class="list">
+        <li><span><strong>Search the internet.</strong> Worst-case results, written for nobody in particular. It raises the anxiety without settling anything.</span></li>
+        <li><span><strong>Wait for a doctor.</strong> Hours on a helpline or days for an appointment. The moment the parent needed help has already passed.</span></li>
+        <li><span><strong>Go to A&amp;E.</strong> A long wait, often for something that turns out not to need emergency care.</span></li>
+      </ul>
+      <p>The gap is not a lack of information. There is more paediatric information available than ever. The gap is that <strong>nothing turns what the parent is looking at into a decision they can act on tonight.</strong></p>
+      <p>That is the whole product. Not more information. A decision, and the line at which the decision changes.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">03</span><h2>Target audience</h2></div>
+    <div class="aud">
+      <div>
+        <span class="k">Primary</span>
+        <b>Parents of children 0 to 4</b>
+        <span>Highest illness frequency and lowest parental confidence. First-time parents most of all. This is where the anxiety lives and where the habit forms.</span>
+      </div>
+      <div>
+        <span class="k">Expansion</span>
+        <b>Parents of children 5 to 15</b>
+        <span>Lower frequency, but the subscription is already paid and the household already has the habit. Retention play, not acquisition.</span>
+      </div>
+    </div>
+    <div class="body" style="margin-top:.85rem">
+      <p><strong>Who actually buys.</strong> Usually the most anxious parent in the household. One decision-maker, one payment, and the whole family is covered, which removes any argument about whether it is worth adding another child.</p>
+      <p><strong>Who else uses it.</strong> The other parent, grandparents, and anyone else looking after the children. Access is by household, not by individual.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">04</span><h2>The main value</h2></div>
+    <div class="body">
+      <p class="lead">A clear answer in minutes, at the moment the parent needs it.</p>
+    </div>
+    <div class="trio">
+      <div class="card c2"><span class="k">Value 1</span><b>It explains</b><span>What is most likely happening, in plain language, for that child's age.</span></div>
+      <div class="card c3"><span class="k">Value 2</span><b>It instructs</b><span>What to do tonight and tomorrow. Concrete, with the reason attached.</span></div>
+      <div class="card c4"><span class="k">Value 3</span><b>It draws the line</b><span>The exact threshold at which to seek care. Numbers, not feelings.</span></div>
+    </div>
+    <div class="edge">
+      The third one is the real product. Every parent already knows to watch their child. Nobody tells them what they are watching <em>for</em>. Turning an open-ended worry into a line you can check against is what converts anxiety into sleep.
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">05</span><h2>Competitive edge</h2></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>The alternative</th><th>What it leaves the parent with</th><th>What Bedside does instead</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="what">Search and forums</td>
+            <td class="gap">Worst-case answers with no way to judge relevance to their own child.</td>
+            <td class="us">One report, written for that child's age and what the parent actually described.</td>
+          </tr>
+          <tr>
+            <td class="what">Symptom checkers</td>
+            <td class="gap">A list of possible conditions, ending in a generic "see a doctor".</td>
+            <td class="us">A decision and a threshold, not a probability list.</td>
+          </tr>
+          <tr>
+            <td class="what">Per-visit telehealth</td>
+            <td class="gap">A fee per consultation, so parents ration usage and wait until they are worried enough.</td>
+            <td class="us">Flat annual fee, so they ask at the first worry instead of the fifth.</td>
+          </tr>
+          <tr>
+            <td class="what">Public health lines</td>
+            <td class="gap">Long waits, and triage built to protect the system rather than to inform the parent.</td>
+            <td class="us">Minutes, in writing, and the parent keeps the report.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="edge">
+      <strong>What is hard to copy:</strong> the threshold library, age-banded and written to be checkable, plus a growing record of each child over time. Anyone can build a symptom form. The defensible asset is the accumulated judgement about where the lines sit, and the trust that comes from a parent having used it before and found it right.
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">06</span><h2>Business model</h2></div>
+    <div class="model">
+      <div class="pricebox"><span class="amt">&pound;96</span><span class="per">per year</span></div>
+      <dl class="terms">
+        <div><dt>Unit</dt><dd>One household, one flat fee</dd></div>
+        <div><dt>Children covered</dt><dd>All children under 16 at the address, however many</dd></div>
+        <div><dt>Assessments</dt><dd>Unlimited</dd></div>
+        <div><dt>Included</dt><dd>Fifteen minutes with a paediatrician, booked from any report</dd></div>
+        <div><dt>Billing</dt><dd>Once a year. No other charges.</dd></div>
+      </dl>
+    </div>
+    <div class="body why">
+      <p><strong>Why flat, not per use.</strong> Usage-based pricing suppresses exactly the behaviour we want. A parent who is charged per report waits until they are frightened. A parent on a flat fee asks early, which is when the guidance is cheapest to give and most useful to receive. It also makes the product feel like insurance against a bad night rather than a purchase made in one.</p>
+      <p><strong>Why per household, not per child.</strong> It removes the worst conversation in the funnel, which is a parent deciding which of their children to cover. It also makes a second child a retention event instead of an upsell.</p>
+      <p><strong>The number that matters</strong> is annual renewal. Everything else follows from whether the reports were right when it counted.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">07</span><h2>Main messaging</h2></div>
+    <div class="anchor">
+      <span class="k">Anchor line</span>
+      <q>Tell us what's happening. We'll tell you what it means.</q>
+      <p>Everything else supports this. It states the exchange in the parent's own terms and promises exactly one thing.</p>
+    </div>
+    <div class="trio" style="margin-top:.85rem">
+      <div class="card c1"><span class="k">Pillar 1</span><b>In your words</b><span>The parent does not need the right terms. The report reads their description back to them.</span></div>
+      <div class="card c2"><span class="k">Pillar 2</span><b>In plain language</b><span>No jargon unless it is explained in the same sentence.</span></div>
+      <div class="card c4"><span class="k">Pillar 3</span><b>With a clear line</b><span>Thresholds you can check, so you know when to act and when not to.</span></div>
+    </div>
+    <div class="body" style="margin-top:.95rem">
+      <p><strong>How we sound.</strong> Calm, plain, declarative. Short sentences. Never urgent or alarmed, because an anxious parent does not need us to raise the temperature. Not commercial in tone, because trust is the product.</p>
+      <div class="voice">
+        <span>Calm</span><span>Plain</span><span>Declarative</span><span>Short sentences</span>
+        <span>No exclamation marks</span><span>Never alarmed</span><span>Never salesy</span>
+      </div>
+      <p style="margin-top:.85rem"><strong>What we never say.</strong> That we diagnose, that we replace a doctor, or anything that implies a parent should wait on us before calling for help. The footer says so plainly and it stays on every page.</p>
+    </div>
+  </section>
+
+  <!-- open questions -->
+  <div class="open">
+    <b>Open before this is a plan</b>
+    <ol>
+      <li><strong>Price.</strong> &pound;96 is a placeholder that reads as reasonable. It has not been tested against willingness to pay.</li>
+      <li><strong>Cost per report.</strong> Depends on how much clinician review each one needs, which drives whether unlimited is viable at this price.</li>
+      <li><strong>Paediatrician call attach rate.</strong> Included in the fee, so it is a cost line. We need a real number.</li>
+      <li><strong>Regulatory position.</strong> Where guidance ends and a regulated medical device begins, in each market we intend to sell in.</li>
+      <li><strong>Renewal.</strong> The whole model rests on it and we have no evidence yet.</li>
+    </ol>
+  </div>
+
+  <div class="foot">
+    <span>Bedside Health Ltd &middot; Internal product brief</span>
+    <span>Figures marked above as open are assumptions, not research.</span>
+  </div>
+</div>
