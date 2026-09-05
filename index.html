@@ -4,596 +4,1009 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bedside</title>
-<meta name="description" content="Paediatric health guidance for parents. Tell us what's happening. We'll tell you what it means.">
+<meta name="description" content="Children's health, explained. Describe what you see in your child. Get a plain-language report in minutes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Source+Sans+3:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-  :root {
-    --ground: #f2f4f1;
-    --sheet: #ffffff;
-    --sheet-2: #f8faf8;
-    --ink: #1e2926;
-    --ink-2: #4f5d59;
-    --muted: #7a8884;
-    --line: #d6ddd9;
-    --line-strong: #b9c4bf;
-    --accent: #35604f;
-    --accent-ink: #ffffff;
-    --accent-soft: #e2ebe6;
-    --accent-line: #9fbdb0;
-    --focus: #35604f;
-    --report-band: #edf2ef;
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  /* surfaces + ink */
+  --ground:#F0F1F9; --sheet:#FFFFFF; --sheet-2:#F7F7FC;
+  --ink:#191B38; --ink-2:#4A4D70; --muted:#737699;
+  --line:#DEDFEE; --line-2:#C4C6DE;
 
-    --serif: "Literata", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    --sans: "Source Sans 3", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* brand */
+  --brand:#6D28D9; --brand-2:#8B5CF6; --on-brand:#FFFFFF;
+  --brand-soft:#EEE9FD; --brand-line:#C9B8F5;
 
-    --measure: 62ch;
-    --radius: 6px;
+  /* hero panel (committed dark in both themes) */
+  --hero-1:#211A4E; --hero-2:#3E2A80;
+  --hero-ink:#FFFFFF; --hero-ink-2:#C7C0E6; --hero-line:rgba(255,255,255,.16);
+  --hero-chip:rgba(255,255,255,.10);
+
+  /* the four report sections - validated categorical set */
+  --s1:#D97706; --s2:#0F8A78; --s3:#2563EB; --s4:#D6336C;
+  --s1-soft:#FDF1E1; --s2-soft:#E2F3F0; --s3-soft:#E7EDFD; --s4-soft:#FCE9F0;
+
+  /* status - reserved, never reused as a section colour */
+  --warn:#B45309; --warn-soft:#FBEEDD; --warn-line:#E7C69C;
+  --urgent:#A61B34; --urgent-soft:#FBE7EB; --urgent-line:#E9AEB8;
+  --good:#0F7A5F; --good-soft:#E3F2EC;
+
+  /* age bands - ordinal, so one hue light to dark */
+  --age-1:#EDE9FD; --age-2:#DCD2FA; --age-3:#C6B5F6; --age-4:#AC94F2;
+  --age-ink:#2B1A63;
+
+  --focus:#6D28D9;
+  --r-sm:8px; --r-md:14px; --r-lg:22px;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Figtree","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --shadow:0 1px 2px rgba(25,27,56,.05), 0 8px 24px -12px rgba(25,27,56,.18);
+  --shadow-lg:0 24px 60px -24px rgba(20,12,60,.45);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+    --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+    --line:#2B2E45; --line-2:#3D4160;
+    --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+    --brand-soft:#241E3F; --brand-line:#4C3E85;
+    --hero-1:#171238; --hero-2:#2E1F60;
+    --hero-ink:#FFFFFF; --hero-ink-2:#BDB6DE; --hero-line:rgba(255,255,255,.14);
+    --hero-chip:rgba(255,255,255,.08);
+    --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+    --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+    --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+    --urgent:#F0899C; --urgent-soft:#31161C; --urgent-line:#6B2F3B;
+    --good:#4FBF9A; --good-soft:#12291F;
+    --age-1:#241E44; --age-2:#2E2559; --age-3:#3B2F72; --age-4:#4C3C90;
+    --age-ink:#E6E0FB;
+    --focus:#A78BFA;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:0 24px 60px -24px rgba(0,0,0,.75);
   }
+}
+:root[data-theme="dark"] {
+  --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+  --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+  --line:#2B2E45; --line-2:#3D4160;
+  --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+  --brand-soft:#241E3F; --brand-line:#4C3E85;
+  --hero-1:#171238; --hero-2:#2E1F60;
+  --hero-ink:#FFFFFF; --hero-ink-2:#BDB6DE; --hero-line:rgba(255,255,255,.14);
+  --hero-chip:rgba(255,255,255,.08);
+  --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+  --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+  --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+  --urgent:#F0899C; --urgent-soft:#31161C; --urgent-line:#6B2F3B;
+  --good:#4FBF9A; --good-soft:#12291F;
+  --age-1:#241E44; --age-2:#2E2559; --age-3:#3B2F72; --age-4:#4C3C90;
+  --age-ink:#E6E0FB;
+  --focus:#A78BFA;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 24px 60px -24px rgba(0,0,0,.75);
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground: #141a18;
-      --sheet: #1b2320;
-      --sheet-2: #1f2825;
-      --ink: #e6ebe8;
-      --ink-2: #b4c0bb;
-      --muted: #8a9994;
-      --line: #2c3733;
-      --line-strong: #3f4d48;
-      --accent: #8fbfab;
-      --accent-ink: #12201b;
-      --accent-soft: #223129;
-      --accent-line: #4c6e61;
-      --focus: #8fbfab;
-      --report-band: #1f2a26;
-    }
-  }
-  :root[data-theme="dark"] {
-    --ground: #141a18;
-    --sheet: #1b2320;
-    --sheet-2: #1f2825;
-    --ink: #e6ebe8;
-    --ink-2: #b4c0bb;
-    --muted: #8a9994;
-    --line: #2c3733;
-    --line-strong: #3f4d48;
-    --accent: #8fbfab;
-    --accent-ink: #12201b;
-    --accent-soft: #223129;
-    --accent-line: #4c6e61;
-    --focus: #8fbfab;
-    --report-band: #1f2a26;
-  }
+/* ============================================================
+   BASE
+   ============================================================ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
-  }
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:600;line-height:1.14;text-wrap:balance;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;letter-spacing:-.012em}
+a{color:var(--brand)}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:2px;border-radius:4px}
 
-  body {
-    margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+.wrap{width:min(100% - 2.5rem, 74rem);margin-inline:auto}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
-  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--sans);font-size:1rem;font-weight:600;
+  padding:.8rem 1.4rem;border-radius:999px;
+  border:1.5px solid var(--brand);background:var(--brand);color:var(--on-brand);
+  text-decoration:none;cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(109,40,217,.6)}
+.btn svg{width:1.05em;height:1.05em;flex:none}
+.btn-ghost{background:transparent;color:var(--brand);border-color:var(--brand-line)}
+.btn-ghost:hover{background:var(--brand-soft);box-shadow:none}
+.btn-light{background:#fff;border-color:#fff;color:#2B1A63}
+.btn-light:hover{box-shadow:0 10px 26px -10px rgba(0,0,0,.6)}
+.btn-outline-light{background:transparent;border-color:var(--hero-line);color:var(--hero-ink)}
+.btn-outline-light:hover{background:var(--hero-chip);box-shadow:none}
 
-  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; margin: 0; text-wrap: balance; }
-  p { margin: 0; }
+.icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-  .wrap { width: min(100% - 2.5rem, 68rem); margin-inline: auto; }
-  .measure { max-width: var(--measure); }
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.1rem 0}
+.lockup{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--hero-ink)}
+.mark{width:38px;height:38px;flex:none;border-radius:11px;background:var(--brand-2);display:grid;place-items:center}
+.mark svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round}
+.lockup-text{display:grid;line-height:1.1}
+.lockup-text b{font-family:var(--display);font-size:1.2rem;font-weight:600;letter-spacing:-.02em;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 20}
+.lockup-text span{font-size:.72rem;color:var(--hero-ink-2);letter-spacing:.055em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:1.6rem;font-size:.95rem;font-weight:500}
+.nav-links a:not(.btn){color:var(--hero-ink-2);text-decoration:none}
+.nav-links a:not(.btn):hover{color:var(--hero-ink)}
+@media (max-width:860px){.nav-links a:not(.btn){display:none}}
 
-  .eyebrow {
-    font-family: var(--sans);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-panel{
+  background:linear-gradient(158deg,var(--hero-1) 0%,var(--hero-2) 62%,#4B2F94 100%);
+  color:var(--hero-ink);
+  position:relative;overflow:hidden;
+  border-radius:0 0 34px 34px;
+}
+.hero-panel::before{
+  content:"";position:absolute;inset:auto -14% -46% 46%;height:70%;
+  background:radial-gradient(closest-side,rgba(167,139,250,.42),transparent 72%);
+  pointer-events:none;
+}
+.hero-panel::after{
+  content:"";position:absolute;top:-12%;left:-8%;width:36%;height:60%;
+  background:radial-gradient(closest-side,rgba(15,138,120,.30),transparent 72%);
+  pointer-events:none;
+}
+.hero{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:3.5rem;align-items:center;
+  padding:3.5rem 0 4.25rem}
+.hero-copy{display:grid;gap:1.4rem;justify-items:start}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:var(--hero-chip);
+  border:1px solid var(--hero-line);border-radius:999px;padding:.4rem .9rem;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;color:var(--hero-ink)}
+.hero-tag svg{width:16px;height:16px;stroke:var(--brand-2);fill:none;stroke-width:2;stroke-linecap:round}
+.hero h1{font-size:clamp(2.15rem,1.3rem + 3.4vw,3.85rem);color:var(--hero-ink);max-width:15ch;
+  font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 90}
+.hero .lede{color:var(--hero-ink-2);font-size:1.12rem;max-width:44ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;padding-top:.35rem}
+.hero-foot{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;font-size:.86rem;color:var(--hero-ink-2);padding-top:.5rem}
+.hero-foot span{display:inline-flex;align-items:center;gap:.45rem}
+.hero-foot svg{width:15px;height:15px;stroke:var(--brand-2);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:2.75rem;padding-bottom:3.5rem}}
 
-  /* ---------- nav ---------- */
-  .nav {
-    display: flex; align-items: baseline; justify-content: space-between;
-    padding: 1.5rem 0;
-  }
-  .wordmark {
-    font-family: var(--serif); font-weight: 600; font-size: 1.25rem; color: var(--ink); text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .nav-links { display: flex; gap: 1.75rem; font-family: var(--sans); font-size: 0.95rem; }
-  .nav-links a { color: var(--ink-2); text-decoration: none; }
-  .nav-links a:hover { color: var(--ink); text-decoration: underline; }
+/* --- device mockup --- */
+.device-stage{position:relative;justify-self:center;width:100%;max-width:22rem}
+.device{
+  background:var(--sheet);border-radius:30px;padding:.5rem;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.28);
+}
+.device-inner{background:var(--sheet);border-radius:24px;overflow:hidden;border:1px solid var(--line)}
+.device-top{display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.05rem;border-bottom:1px solid var(--line);font-size:.72rem;color:var(--muted);font-weight:600}
+.device-top b{color:var(--ink);font-size:.8rem;font-weight:700}
+.device-body{padding:1.05rem}
+.device-kid{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;
+  font-weight:700;font-size:.85rem;background:var(--age-3);color:var(--age-ink)}
+.device-kid div{display:grid;line-height:1.25}
+.device-kid b{font-size:.9rem;color:var(--ink)}
+.device-kid span{font-size:.74rem;color:var(--muted);font-weight:500}
+.device-title{font-family:var(--display);font-size:1.06rem;font-weight:600;line-height:1.25;color:var(--ink);
+  margin-bottom:.9rem;font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 20}
+.device-list{display:grid;gap:.5rem;margin-bottom:1rem}
+.device-row{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;
+  padding:.5rem .65rem;border-radius:10px;background:var(--sheet-2);font-size:.8rem;font-weight:600;color:var(--ink-2)}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.device-cta{display:flex;align-items:center;justify-content:center;gap:.4rem;
+  background:var(--brand);color:var(--on-brand);border-radius:999px;padding:.6rem;
+  font-size:.8rem;font-weight:700;text-align:center}
 
-  /* ---------- hero ---------- */
-  .hero {
-    padding: 4.5rem 0 4rem;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    gap: 1.75rem;
-  }
-  .hero h1 {
-    font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    max-width: 22ch;
-  }
-  .hero .lede { font-size: 1.2rem; color: var(--ink-2); max-width: 50ch; }
-  .hero .lede + .lede { margin-top: -0.75rem; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; font-family: var(--sans); font-size: 1rem; }
+.device-stats{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.85rem}
+.device-stat{background:var(--sheet-2);border:1px solid var(--line);border-radius:10px;
+  padding:.45rem .6rem;display:grid;gap:.05rem;line-height:1.2}
+.device-stat b{font-size:.88rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.device-stat.good b{color:var(--good)}
+.device-stat span{font-size:.62rem;color:var(--muted);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 
-  .btn {
-    display: inline-block;
-    font-family: var(--sans);
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0.8rem 1.35rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: var(--accent-ink);
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 120ms ease, border-color 120ms ease;
-  }
-  .btn:hover { filter: brightness(1.06); }
-  .btn.quiet { background: transparent; color: var(--accent); }
-  .btn.quiet:hover { background: var(--accent-soft); }
+/* ============================================================
+   TRUST STRIP
+   ============================================================ */
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem 2.5rem;
+  padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.trust span{display:inline-flex;align-items:center;gap:.5rem;font-size:.88rem;font-weight:600;color:var(--ink-2)}
+.trust svg{width:17px;height:17px;stroke:var(--brand);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-  /* ---------- sections ---------- */
-  .section { padding: 4rem 0; border-bottom: 1px solid var(--line); }
-  .section-head { display: grid; gap: 0.75rem; margin-bottom: 2.25rem; }
-  .section h2 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); }
-  .section .intro { color: var(--ink-2); max-width: var(--measure); }
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{padding:4.5rem 0}
+.section-head{display:grid;gap:.75rem;max-width:44rem;margin-bottom:2.5rem}
+.section-head h2{font-size:clamp(1.7rem,1.2rem + 1.7vw,2.5rem)}
+.section-head p{color:var(--ink-2);max-width:56ch}
 
-  .steps {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
-    counter-reset: step;
-  }
-  .step { display: grid; gap: 0.6rem; align-content: start; }
-  .step::before {
-    counter-increment: step;
-    content: counter(step);
-    font-family: var(--sans); font-weight: 600; font-size: 0.85rem;
-    color: var(--accent);
-    width: 1.75rem; height: 1.75rem; border-radius: 50%;
-    border: 1px solid var(--accent-line);
-    display: grid; place-items: center;
-    margin-bottom: 0.5rem;
-  }
-  .step h3 { font-size: 1.2rem; font-weight: 500; }
-  .step p { color: var(--ink-2); font-size: 1rem; }
-  @media (max-width: 720px) { .steps { grid-template-columns: 1fr; gap: 2rem; } }
+/* --- age bands --- */
+.ages{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.age{border-radius:var(--r-md);padding:1.25rem;display:grid;gap:.5rem;align-content:start;
+  background:var(--sheet);border:1px solid var(--line)}
+.age-key{display:inline-flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:700;color:var(--ink)}
+.age-swatch{width:16px;height:16px;border-radius:5px;flex:none}
+.age h3{font-size:1.02rem;font-weight:600;font-family:var(--sans);letter-spacing:0}
+.age p{font-size:.92rem;color:var(--ink-2)}
+.age-1 .age-swatch{background:var(--age-1);border:1px solid var(--line-2)}
+.age-2 .age-swatch{background:var(--age-2)}
+.age-3 .age-swatch{background:var(--age-3)}
+.age-4 .age-swatch{background:var(--age-4)}
+@media (max-width:900px){.ages{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.ages{grid-template-columns:1fr}}
 
-  /* ---------- pricing ---------- */
-  .plan {
-    display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start;
-  }
-  .plan-terms { display: grid; gap: 0; border-top: 1px solid var(--line); font-family: var(--sans); }
-  .plan-terms div {
-    display: grid; grid-template-columns: 11rem 1fr; gap: 1rem;
-    padding: 0.9rem 0; border-bottom: 1px solid var(--line); font-size: 1rem;
-  }
-  .plan-terms dt { color: var(--muted); margin: 0; }
-  .plan-terms dd { margin: 0; color: var(--ink); }
-  .price { display: grid; gap: 0.5rem; }
-  .price .amount { font-family: var(--serif); font-size: 2.6rem; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
-  .price .amount small { font-size: 1.05rem; font-weight: 400; color: var(--ink-2); letter-spacing: 0; margin-left: 0.35rem; }
-  .price p { color: var(--ink-2); max-width: 36ch; }
-  @media (max-width: 720px) { .plan { grid-template-columns: 1fr; gap: 2rem; } .plan-terms div { grid-template-columns: 1fr; gap: 0.15rem; } }
+/* --- symptom tiles --- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.tile{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:1.15rem;display:grid;gap:.55rem;align-content:start;
+  transition:transform .13s ease,border-color .13s ease}
+.tile:hover{transform:translateY(-2px);border-color:var(--brand-line)}
+.tile-ico{width:42px;height:42px;border-radius:12px;background:var(--brand-soft);
+  display:grid;place-items:center;color:var(--brand)}
+.tile-ico svg{width:21px;height:21px}
+.tile b{font-size:.98rem;font-weight:700;color:var(--ink)}
+.tile span{font-size:.87rem;color:var(--muted);line-height:1.45}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.tiles{grid-template-columns:1fr}}
 
-  /* ---------- sample: shared sheet ---------- */
-  .sample { padding-bottom: 5rem; }
-  .sample-note {
-    font-family: var(--sans); font-size: 0.95rem; color: var(--muted);
-    display: flex; gap: 0.6rem; align-items: baseline;
-  }
-  .sample-note::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent-line); flex: none; transform: translateY(-1px); }
+/* --- four parts of a report --- */
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.part{border-radius:var(--r-md);padding:1.3rem;display:grid;gap:.5rem;align-content:start;
+  background:var(--sheet);border:1px solid var(--line);border-top:4px solid var(--pc)}
+.part-n{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pc)}
+.part h3{font-family:var(--display);font-size:1.15rem;font-weight:600}
+.part p{font-size:.92rem;color:var(--ink-2)}
+.p1{--pc:var(--s1)} .p2{--pc:var(--s2)} .p3{--pc:var(--s3)} .p4{--pc:var(--s4)}
+@media (max-width:900px){.parts{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.parts{grid-template-columns:1fr}}
 
-  .sheet {
-    background: var(--sheet);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    margin-top: 2rem;
-    max-width: 46rem;
-  }
-  .sheet-bar {
-    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-    padding: 1rem 1.75rem;
-    border-bottom: 1px solid var(--line);
-    font-family: var(--sans); font-size: 0.9rem; color: var(--muted);
-  }
-  .sheet-bar strong { color: var(--ink); font-weight: 600; }
-  .sheet-body { padding: 2rem 1.75rem 2.25rem; }
-  @media (max-width: 560px) { .sheet-bar, .sheet-body { padding-inline: 1.15rem; } }
+/* --- how it works --- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.step{display:grid;gap:.6rem;align-content:start}
+.step-n{width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;
+  background:var(--brand);color:var(--on-brand);font-weight:700;font-size:1rem;margin-bottom:.35rem}
+.step h3{font-family:var(--display);font-size:1.25rem}
+.step p{color:var(--ink-2);font-size:.97rem}
+@media (max-width:760px){.steps{grid-template-columns:1fr;gap:1.75rem}}
 
-  /* ---------- intake form ---------- */
-  .form { display: grid; gap: 1.6rem; font-family: var(--sans); }
-  .form h3 { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; margin-bottom: 0.25rem; }
-  .form .help { font-size: 0.95rem; color: var(--ink-2); font-family: var(--serif); }
-  .field { display: grid; gap: 0.45rem; }
-  .field label, .field .label { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
-  .field .hint { font-size: 0.875rem; color: var(--muted); font-weight: 400; }
-  .field input[type="text"], .field textarea, .field select {
-    font: inherit; font-size: 1rem; color: var(--ink);
-    background: var(--sheet-2);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    padding: 0.7rem 0.85rem;
-    width: 100%;
-  }
-  .field textarea { min-height: 9.5rem; resize: vertical; line-height: 1.55; font-family: var(--serif); }
-  .field select { appearance: none; -webkit-appearance: none; padding-right: 2.5rem;
-    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
-    background-position: calc(100% - 1.15rem) 55%, calc(100% - 0.85rem) 55%;
-    background-size: 0.3rem 0.3rem; background-repeat: no-repeat; }
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  @media (max-width: 560px) { .row-2 { grid-template-columns: 1fr; } }
+/* ============================================================
+   MOCKUP: SHEETS
+   ============================================================ */
+.mock{max-width:47rem;margin-inline:auto}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--shadow);overflow:hidden}
+.sheet + .sheet{margin-top:0}
+.sheet-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1rem 1.6rem;border-bottom:1px solid var(--line);background:var(--sheet-2);
+  font-size:.83rem;color:var(--muted);font-weight:600}
+.sheet-bar b{color:var(--ink);font-size:.95rem;font-weight:700}
+.sheet-bar .bar-l{display:flex;align-items:center;gap:.6rem}
+.sheet-bar svg{width:17px;height:17px;stroke:var(--brand);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sheet-body{padding:1.9rem 1.6rem 2.1rem}
+@media (max-width:560px){.sheet-bar,.sheet-body{padding-inline:1.05rem}}
 
-  .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .choices label {
-    font-weight: 500; font-size: 0.95rem; color: var(--ink-2);
-    border: 1px solid var(--line-strong); border-radius: 999px;
-    padding: 0.4rem 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--sheet);
-  }
-  .choices input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .choices label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
-  .choices label:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.between{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;
+  padding:1.5rem 0;color:var(--muted);font-size:.85rem;font-weight:600}
+.between::before,.between::after{content:"";height:1px;background:var(--line)}
+.between span{display:inline-flex;align-items:center;gap:.45rem}
+.between svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-  .children { display: grid; gap: 0.5rem; }
-  .children label {
-    display: grid; grid-template-columns: auto 1fr auto; gap: 0.85rem; align-items: center;
-    border: 1px solid var(--line-strong); border-radius: var(--radius);
-    padding: 0.75rem 0.9rem; cursor: pointer; font-weight: 500; color: var(--ink);
-    background: var(--sheet);
-  }
-  .children label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
-  .children label:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
-  .children input { accent-color: var(--accent); margin: 0; }
-  .children .age { font-weight: 400; color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+/* ============================================================
+   INTAKE FORM
+   ============================================================ */
+.form{display:grid;gap:1.6rem}
+.form-intro{display:grid;gap:.4rem}
+.form-intro h3{font-family:var(--display);font-size:1.5rem}
+.form-intro p{color:var(--ink-2);font-size:.97rem}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{padding:0}
+.field{display:grid;gap:.5rem}
+.flabel{font-size:.93rem;font-weight:700;color:var(--ink)}
+.fhint{font-weight:500;color:var(--muted);font-size:.85rem}
+.field input[type=text],.field textarea,.field select{
+  font:inherit;font-size:.98rem;color:var(--ink);background:var(--sheet-2);
+  border:1.5px solid var(--line-2);border-radius:var(--r-sm);padding:.7rem .85rem;width:100%}
+.field textarea{min-height:8.5rem;resize:vertical;line-height:1.55}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);background:var(--sheet)}
+.field select{appearance:none;padding-right:2.4rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 1.1rem) 55%,calc(100% - .85rem) 55%;
+  background-size:.3rem .3rem;background-repeat:no-repeat}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
 
-  .form-foot {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
-    padding-top: 1.25rem; border-top: 1px solid var(--line);
-  }
-  .form-foot p { font-size: 0.9rem; color: var(--muted); max-width: 30rem; font-family: var(--serif); }
+/* kid picker */
+.kids{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.kid{display:grid;grid-template-columns:auto 1fr auto;gap:.7rem;align-items:center;cursor:pointer;
+  border:1.5px solid var(--line-2);border-radius:var(--r-md);padding:.7rem .85rem;background:var(--sheet)}
+.kid:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.kid:has(input:focus-visible){outline:2.5px solid var(--focus);outline-offset:2px}
+.kid input{position:absolute;opacity:0;width:1px;height:1px}
+.kid b{font-size:.94rem;font-weight:700;color:var(--ink);line-height:1.2}
+.kid .yrs{font-size:.78rem;font-weight:600;color:var(--age-ink);background:var(--age-2);
+  border-radius:999px;padding:.15rem .55rem;font-variant-numeric:tabular-nums}
+.kid.k2 .yrs{background:var(--age-3)}
+@media (max-width:560px){.kids{grid-template-columns:1fr}}
 
-  /* ---------- between form and report ---------- */
-  .then {
-    max-width: 46rem; margin-top: 2.5rem;
-    display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center;
-    font-family: var(--sans); font-size: 0.95rem; color: var(--muted);
-  }
-  .then::after { content: ""; height: 1px; background: var(--line); }
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips label{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;
+  border:1.5px solid var(--line-2);border-radius:999px;padding:.42rem .9rem;
+  font-size:.9rem;font-weight:600;color:var(--ink-2);background:var(--sheet)}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label:has(input:checked){border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.chips label:has(input:focus-visible){outline:2.5px solid var(--focus);outline-offset:2px}
 
-  /* ---------- report ---------- */
-  .report { font-family: var(--serif); }
-  .report-head { display: grid; gap: 0.6rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--line); }
-  .report-head h3 { font-size: 1.55rem; font-weight: 500; }
-  .report-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+/* body map */
+.bodymap{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;
+  background:var(--sheet-2);border:1px solid var(--line);border-radius:var(--r-md);padding:1.1rem 1.25rem}
+.bm-figure{position:relative;width:186px;flex:none}
+.bm-figure svg{display:block;width:100%;height:auto}
+.bm-body{fill:var(--brand-soft);stroke:var(--brand-line);stroke-width:2}
+.spot{position:absolute;transform:translate(-50%,-50%);width:23px;height:23px;border-radius:50%;
+  border:2px solid var(--brand-line);background:var(--sheet);cursor:pointer;display:grid;place-items:center;
+  padding:0;transition:transform .12s ease}
+.spot:hover{border-color:var(--brand)}
+.spot input{position:absolute;opacity:0;width:1px;height:1px}
+.spot i{width:7px;height:7px;border-radius:50%;background:var(--brand-line);display:block}
+.spot:has(input:checked){background:var(--brand);border-color:var(--brand)}
+.spot:has(input:checked) i{background:#fff}
+.spot:has(input:focus-visible){outline:2.5px solid var(--focus);outline-offset:2px}
+.bm-legend{display:grid;gap:.5rem}
+.bm-legend b{font-size:.93rem;font-weight:700;color:var(--ink)}
+.bm-legend p{font-size:.88rem;color:var(--muted)}
+.bm-picked{display:inline-flex;align-items:center;gap:.5rem;background:var(--brand-soft);
+  color:var(--brand);border-radius:999px;padding:.35rem .8rem;font-size:.85rem;font-weight:700;justify-self:start}
+@media (max-width:600px){.bodymap{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .bm-picked{justify-self:center}}
 
-  .rsec { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; padding: 2rem 0; border-bottom: 1px solid var(--line); }
-  .rsec > .rlabel { display: grid; gap: 0.35rem; align-content: start; }
-  .rsec > .rlabel h4 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin: 0; line-height: 1.3; }
-  .rsec > .rlabel span { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
-  .rsec > .rbody { display: grid; gap: 1rem; max-width: 52ch; }
-  .rsec > .rbody p { color: var(--ink); }
-  .rsec > .rbody .aside { color: var(--ink-2); font-size: 0.95rem; }
-  @media (max-width: 640px) { .rsec { grid-template-columns: 1fr; gap: 0.75rem; } }
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;
+  padding-top:1.3rem;border-top:1px solid var(--line)}
+.form-foot p{font-size:.87rem;color:var(--muted);max-width:29rem}
 
-  .told { background: var(--report-band); border-left: 3px solid var(--accent-line); padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0; }
-  .told p + p { margin-top: 0.75rem; }
+/* ============================================================
+   REPORT
+   ============================================================ */
+.rep-head{display:grid;gap:.8rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.rep-kid{display:flex;align-items:center;gap:.65rem}
+.rep-kid b{font-size:.95rem;font-weight:700}
+.rep-kid span{font-size:.8rem;color:var(--muted);font-weight:600}
+.rep-head h3{font-family:var(--display);font-size:clamp(1.4rem,1.1rem + 1vw,1.85rem)}
+.rep-meta{display:flex;flex-wrap:wrap;gap:.5rem}
+.pill{display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;padding:.3rem .75rem;
+  font-size:.8rem;font-weight:700;border:1px solid var(--line-2);color:var(--ink-2);background:var(--sheet-2);
+  font-variant-numeric:tabular-nums}
+.pill svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pill-good{background:var(--good-soft);border-color:transparent;color:var(--good)}
+.pill-warn{background:var(--warn-soft);border-color:transparent;color:var(--warn)}
 
-  .term { border-bottom: 1px dotted var(--line-strong); }
-  .gloss { display: grid; gap: 0.75rem; }
-  .gloss div { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; font-size: 0.95rem; color: var(--ink-2); }
-  .gloss dt { margin: 0; font-family: var(--sans); font-weight: 600; color: var(--ink); }
-  .gloss dd { margin: 0; }
+/* vitals row */
+.vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1.5rem 0 0}
+.vital{background:var(--sheet-2);border:1px solid var(--line);border-radius:var(--r-md);padding:.85rem 1rem;
+  display:grid;gap:.25rem}
+.vital .vk{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.vital .vv{display:inline-flex;align-items:center;gap:.4rem;font-size:.98rem;font-weight:700;color:var(--ink)}
+.vital .vv svg{width:16px;height:16px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.vital.ok .vv svg{stroke:var(--good)} .vital.watch .vv svg{stroke:var(--warn)}
+@media (max-width:640px){.vitals{grid-template-columns:1fr}}
 
-  .todo { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
-  .todo li { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.75rem; align-items: start; }
-  .todo li::before { content: ""; width: 1rem; height: 1rem; border: 1.5px solid var(--accent-line); border-radius: 3px; margin-top: 0.4rem; }
-  .todo strong { font-weight: 600; }
-  .todo .why { display: block; color: var(--ink-2); font-size: 0.95rem; margin-top: 0.15rem; }
+/* report sections */
+.rsec{padding:1.9rem 0;border-bottom:1px solid var(--line)}
+.rsec-head{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.rsec-badge{width:1.9rem;height:1.9rem;border-radius:9px;display:grid;place-items:center;flex:none;
+  background:var(--sc);color:#fff;font-size:.82rem;font-weight:700}
+.rsec-head h4{font-family:var(--display);font-size:1.28rem;font-weight:600}
+.rsec-body{display:grid;gap:1rem;max-width:56ch;padding-left:2.6rem}
+.rsec-body p{color:var(--ink)}
+.rsec-body .aside{color:var(--muted);font-size:.92rem}
+.r1{--sc:var(--s1);--sbg:var(--s1-soft)} .r2{--sc:var(--s2);--sbg:var(--s2-soft)}
+.r3{--sc:var(--s3);--sbg:var(--s3-soft)} .r4{--sc:var(--s4);--sbg:var(--s4-soft)}
+@media (max-width:560px){.rsec-body{padding-left:0}}
 
-  .thresholds { display: grid; border-top: 1px solid var(--line); }
-  .thresholds div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .thresholds dt { margin: 0; font-family: var(--sans); font-weight: 600; font-size: 1rem; font-variant-numeric: tabular-nums; color: var(--ink); }
-  .thresholds dd { margin: 0; color: var(--ink-2); font-size: 0.98rem; }
-  @media (max-width: 480px) { .thresholds div { grid-template-columns: 1fr; gap: 0.2rem; } }
-  .escalate { display: grid; gap: 0.5rem; font-size: 0.98rem; }
-  .escalate p strong { font-weight: 600; }
+.quote{background:var(--sbg);border-left:3px solid var(--sc);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:1rem 1.15rem;font-size:1rem;line-height:1.62}
 
-  .next { padding: 2.25rem 0 0.5rem; display: grid; gap: 1rem; max-width: 52ch; }
-  .next .eyebrow { color: var(--accent); }
-  .next h4 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; margin: 0; }
-  .next p { color: var(--ink-2); }
-  .next .btn { justify-self: start; margin-top: 0.25rem; }
-  .next small { font-family: var(--sans); font-size: 0.85rem; color: var(--muted); }
+/* fever chart */
+.chart-card{background:var(--sheet-2);border:1px solid var(--line);border-radius:var(--r-md);padding:1.1rem 1.15rem;display:grid;gap:.7rem}
+.chart-card .ct{display:grid;gap:.15rem}
+.chart-card .ct b{font-size:.95rem;font-weight:700;color:var(--ink)}
+.chart-card .ct span{font-size:.83rem;color:var(--muted)}
+.chart-scroll{overflow-x:auto}
+.chart-scroll svg{display:block;min-width:420px;width:100%;height:auto}
+.ax{fill:var(--muted);font-family:var(--sans);font-size:11px;font-weight:600}
+.gridline{stroke:var(--line);stroke-width:1}
+.thresh{stroke:var(--warn);stroke-width:1.5;stroke-dasharray:5 4;fill:none}
+.thresh-lbl{fill:var(--warn);font-family:var(--sans);font-size:10.5px;font-weight:700}
+.series{stroke:var(--brand);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pt{fill:var(--brand)}
+.pt-last{fill:var(--brand);stroke:var(--sheet-2);stroke-width:2.5}
+.pt-lbl{fill:var(--ink);font-family:var(--sans);font-size:12px;font-weight:700}
 
-  /* ---------- footer ---------- */
-  .footer { padding: 3rem 0 4rem; display: grid; gap: 1.25rem; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); }
-  .footer .about { color: var(--ink-2); max-width: 60ch; font-family: var(--serif); font-size: 1rem; }
-  .footer-row { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-  .footer a { color: var(--muted); }
+/* what to do list */
+.todo{list-style:none;padding:0;margin:0;display:grid;gap:.85rem}
+.todo li{display:grid;grid-template-columns:1.6rem 1fr;gap:.75rem;align-items:start}
+.todo li::before{content:"";width:1.15rem;height:1.15rem;border:2px solid var(--sc);border-radius:6px;margin-top:.28rem}
+.todo b{font-weight:700;color:var(--ink)}
+.todo .why{display:block;color:var(--ink-2);font-size:.93rem;margin-top:.15rem}
+
+/* thresholds */
+.tier{border:1px solid var(--tl);background:var(--tbg);border-radius:var(--r-md);overflow:hidden}
+.tier + .tier{margin-top:.9rem}
+.tier-head{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.05rem;border-bottom:1px solid var(--tl)}
+.tier-head svg{width:19px;height:19px;stroke:var(--tc);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tier-head b{font-size:.98rem;font-weight:700;color:var(--tc)}
+.tier ul{list-style:none;margin:0;padding:.4rem 1.05rem .9rem}
+.tier li{display:grid;grid-template-columns:8.5rem 1fr;gap:.9rem;padding:.6rem 0;align-items:baseline}
+.tier li + li{border-top:1px solid var(--tl)}
+.tier .k{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;font-size:.98rem}
+.tier .d{color:var(--ink-2);font-size:.94rem}
+.t-warn{--tc:var(--warn);--tbg:var(--warn-soft);--tl:var(--warn-line)}
+.t-urgent{--tc:var(--urgent);--tbg:var(--urgent-soft);--tl:var(--urgent-line)}
+@media (max-width:520px){.tier li{grid-template-columns:1fr;gap:.15rem}}
+
+/* next step */
+.next{padding:1.9rem 0 .25rem;display:grid;gap:.85rem;max-width:52ch}
+.next .eyebrow{color:var(--brand)}
+.next h4{font-family:var(--display);font-size:1.35rem}
+.next p{color:var(--ink-2);font-size:.97rem}
+.next .btn{justify-self:start;margin-top:.2rem}
+.next small{font-size:.85rem;color:var(--muted)}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.price-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--r-lg);overflow:hidden;
+  border:1px solid var(--line);background:var(--sheet);box-shadow:var(--shadow)}
+.price-l{background:linear-gradient(158deg,var(--hero-1),var(--hero-2));color:var(--hero-ink);
+  padding:2.4rem 2.2rem;display:grid;gap:.9rem;align-content:center}
+.price-l .eyebrow{color:var(--hero-ink-2)}
+.price-amt{font-family:var(--display);font-size:3.6rem;font-weight:600;line-height:1;letter-spacing:-.03em;
+  font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 110}
+.price-amt sub{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--hero-ink-2);
+  vertical-align:baseline;margin-left:.5rem;letter-spacing:0}
+.price-l p{color:var(--hero-ink-2);font-size:.97rem;max-width:32ch}
+.household{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;padding-top:.4rem}
+.household .avatar{width:32px;height:32px;font-size:.8rem;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.household .more{border:1.5px dashed var(--hero-line);color:var(--hero-ink-2);border-radius:999px;
+  padding:.3rem .7rem;font-size:.78rem;font-weight:700}
+.price-r{padding:2.4rem 2.2rem;display:grid;gap:1.1rem;align-content:center}
+.price-r h3{font-family:var(--display);font-size:1.4rem}
+.incl{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.incl li{display:grid;grid-template-columns:1.5rem 1fr;gap:.7rem;align-items:start;font-size:.97rem;color:var(--ink-2)}
+.incl svg{width:19px;height:19px;stroke:var(--good);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:.18rem}
+.incl b{color:var(--ink);font-weight:700}
+@media (max-width:820px){.price-card{grid-template-columns:1fr}.price-l,.price-r{padding:2rem 1.5rem}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{background:var(--sheet);border-top:1px solid var(--line);margin-top:1rem}
+.footer-in{padding:2.75rem 0;display:grid;gap:1.5rem}
+.safety{display:grid;grid-template-columns:auto 1fr;gap:.9rem;background:var(--sheet-2);
+  border:1px solid var(--line);border-radius:var(--r-md);padding:1.1rem 1.25rem;max-width:60rem}
+.safety svg{width:21px;height:21px;stroke:var(--urgent);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:.15rem}
+.safety p{font-size:.94rem;color:var(--ink-2)}
+.safety b{color:var(--ink)}
+.footer-row{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;font-size:.87rem;color:var(--muted);
+  padding-top:.5rem;border-top:1px solid var(--line)}
+.footer-row a{color:var(--muted);text-decoration:none}
+.footer-row a:hover{color:var(--ink);text-decoration:underline}
 </style>
 </head>
 <body>
 
-<header class="wrap nav">
-  <a class="wordmark" href="#top" id="top">Bedside</a>
-  <nav class="nav-links" aria-label="Site">
-    <a href="#how">How it works</a>
-    <a href="#sample">Sample report</a>
-    <a href="#plan">One fee</a>
-    <a href="#sign-in">Sign in</a>
-  </nav>
-</header>
+<!-- ===== icon sprite ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M5 20V7.5A3.5 3.5 0 0 1 8.5 4h7A3.5 3.5 0 0 1 19 7.5V20"/><path d="M5 9h3M5 13h3M5 17h3M19 9h-3M19 13h-3M19 17h-3"/></symbol>
+  <symbol id="i-temp" viewBox="0 0 24 24"><path d="M14 14.8V4.8a2.5 2.5 0 0 0-5 0v10a4.5 4.5 0 1 0 5 0Z"/><path d="M11.5 8.2H14"/></symbol>
+  <symbol id="i-breath" viewBox="0 0 24 24"><path d="M12 4v9.5"/><path d="M12 13.5c0 3-1.9 5.5-4.4 5.5S4 17 4 14.4c0-3 1.6-6.2 3.2-7.7"/><path d="M12 13.5c0 3 1.9 5.5 4.4 5.5S20 17 20 14.4c0-3-1.6-6.2-3.2-7.7"/></symbol>
+  <symbol id="i-rash" viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.7" fill="currentColor" stroke="none"/><circle cx="15.2" cy="6.8" r="1.25" fill="currentColor" stroke="none"/><circle cx="12" cy="13" r="1.6" fill="currentColor" stroke="none"/><circle cx="17.4" cy="14.2" r="1.35" fill="currentColor" stroke="none"/><circle cx="7.6" cy="16.8" r="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-tummy" viewBox="0 0 24 24"><path d="M3.8 11h16.4a8.2 8.2 0 0 1-16.4 0Z"/><path d="M12 3.5v3.8"/><path d="M4.5 21h15"/></symbol>
+  <symbol id="i-sleep" viewBox="0 0 24 24"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></symbol>
+  <symbol id="i-bump" viewBox="0 0 24 24"><rect x="2.8" y="8.8" width="18.4" height="6.4" rx="3.2" transform="rotate(-32 12 12)"/><path d="M9.4 9.4 14.6 14.6"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 24 24"><path d="M6.6 10.4a5.4 5.4 0 1 1 10.8 0c0 3.1-1.8 4.4-2.8 5.8-.8 1.1-.6 3.3-2.6 3.3"/><path d="M9.6 10.4a2.4 2.4 0 1 1 4.8 0c0 1.6-.8 2.3-1.8 3.2"/></symbol>
+  <symbol id="i-mood" viewBox="0 0 24 24"><path d="M20 14.6a3 3 0 0 1-3 3H9.4L5.4 20.5V17.6H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3Z"/><path d="M9 10.4h6"/><path d="M9 13.4h3.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.6 9.4 17.5 19.5 6.8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2 19.5 6v6.2c0 4.5-3.1 7.5-7.5 8.8-4.4-1.3-7.5-4.3-7.5-8.8V6Z"/><path d="M9 12.2l2.1 2.1 4-4.2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.3l3.3 2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4.2 21 19.4H3Z"/><path d="M12 10v4.1"/><circle cx="12" cy="16.9" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h14"/><path d="m12.8 6.3 5.7 5.7-5.7 5.7"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4.5 4.5V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M13.2 3.6V8.5H18"/><path d="M8.4 12.5h7M8.4 16h4.6"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4.2L19.4 8.8a2.3 2.3 0 0 0-3.2-3.2L5 16.8Z"/><path d="M14.8 7 17 9.2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.2" r="3.4"/><path d="M3.2 19.6a5.8 5.8 0 0 1 11.6 0"/><path d="M16 5.2a3.4 3.4 0 0 1 0 6.6"/><path d="M17.4 14.4a5.8 5.8 0 0 1 3.4 5.2"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5.2" width="17" height="15.3" rx="2.5"/><path d="M3.5 10h17M8.2 3.5v3.4M15.8 3.5v3.4"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v14"/><path d="m6.3 12.8 5.7 5.7 5.7-5.7"/></symbol>
+</defs></svg>
+
+<!-- ===== HERO ===== -->
+<div class="hero-panel">
+  <header class="wrap nav">
+    <a class="lockup" href="#top" id="top">
+      <span class="mark"><svg><use href="#i-mark"/></svg></span>
+      <span class="lockup-text"><b>Bedside</b><span>Children's health</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#ages">Ages 0 to 15</a>
+      <a href="#asks">What you can ask</a>
+      <a href="#mockup">Sample report</a>
+      <a href="#plan">One yearly fee</a>
+      <a class="btn btn-light" href="#mockup">Start an assessment</a>
+    </nav>
+  </header>
+
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <span class="hero-tag"><svg><use href="#i-users"/></svg> For parents of children 0 to 15</span>
+      <h1>Tell us what’s happening. We’ll tell you what it means.</h1>
+      <p class="lede">It is late. Your child is not right. You do not know how much it matters.</p>
+      <p class="lede">Describe what you see. In a few minutes you get a written report that explains it, tells you what to do tonight, and gives you the exact points at which to seek care.</p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#mockup">See a sample report <svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-outline-light" href="#how">How it works</a>
+      </div>
+      <div class="hero-foot">
+        <span><svg><use href="#i-shield"/></svg> Reviewed by paediatricians</span>
+        <span><svg><use href="#i-users"/></svg> Every child in the household</span>
+        <span><svg><use href="#i-doc"/></svg> Unlimited assessments</span>
+      </div>
+    </div>
+
+    <div class="device-stage">
+      <div class="device">
+        <div class="device-inner">
+          <div class="device-top"><b>Your report</b><span>21:38</span></div>
+          <div class="device-body">
+            <div class="device-kid">
+              <span class="avatar">A</span>
+              <div><b>Amara</b><span>2 years 4 months</span></div>
+            </div>
+            <p class="device-title">A fever and a night-time cough, since yesterday</p>
+            <div class="device-stats">
+              <div class="device-stat"><b>38.6 °C</b><span>Highest today</span></div>
+              <div class="device-stat good"><b>Still drinking</b><span>Good sign</span></div>
+            </div>
+            <div class="device-list">
+              <div class="device-row"><span class="dot" style="background:var(--s1)"></span> What you told us</div>
+              <div class="device-row"><span class="dot" style="background:var(--s2)"></span> What it likely means</div>
+              <div class="device-row"><span class="dot" style="background:var(--s3)"></span> What to do now</div>
+              <div class="device-row"><span class="dot" style="background:var(--s4)"></span> When to worry</div>
+            </div>
+            <div class="device-cta">Book 15 minutes with a paediatrician</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <main>
-  <section class="wrap hero">
-    <p class="eyebrow">Paediatric guidance for parents</p>
-    <h1>Tell us what’s happening. We’ll tell you what it means.</h1>
-    <p class="lede">It is late. Your child is not right. You do not know how much it matters.</p>
-    <p class="lede">Describe what you see, in your own words. Within minutes you get a written report. It reflects back what you said, explains what it usually means, tells you what to do now, and sets out when to worry.</p>
-    <div class="hero-actions">
-      <a class="btn" href="#sample">See a sample report</a>
-      <a href="#how">How it works</a>
+  <!-- ===== TRUST STRIP ===== -->
+  <div class="wrap trust">
+    <span><svg><use href="#i-shield"/></svg> Written against NICE guidance for children</span>
+    <span><svg><use href="#i-users"/></svg> Every child under 16 at your address</span>
+    <span><svg><use href="#i-doc"/></svg> Plain language, every term explained</span>
+    <span><svg><use href="#i-calendar"/></svg> One fee a year</span>
+  </div>
+
+  <!-- ===== AGE BANDS ===== -->
+  <section class="wrap section" id="ages">
+    <div class="section-head">
+      <span class="eyebrow">Who it is for</span>
+      <h2>Built for children, from newborn to fifteen.</h2>
+      <p>What is ordinary at six months is not ordinary at ten years. Every report is written for the age of the child it is about.</p>
+    </div>
+    <div class="ages">
+      <div class="age age-1">
+        <span class="age-key"><span class="age-swatch"></span> Under 1</span>
+        <h3>Babies</h3>
+        <p>Feeding, weight, crying that will not settle, breathing, temperature. Thresholds here are tighter, and we say so.</p>
+      </div>
+      <div class="age age-2">
+        <span class="age-key"><span class="age-swatch"></span> 1 to 4</span>
+        <h3>Toddlers</h3>
+        <p>Fevers, coughs, rashes, tummy upsets. Most of what happens at this age is a virus, and most of it passes.</p>
+      </div>
+      <div class="age age-3">
+        <span class="age-key"><span class="age-swatch"></span> 5 to 11</span>
+        <h3>School age</h3>
+        <p>Ear and throat pain, headaches, tummy aches, sleep, days off school, injuries from falls.</p>
+      </div>
+      <div class="age age-4">
+        <span class="age-key"><span class="age-swatch"></span> 12 to 15</span>
+        <h3>Teenagers</h3>
+        <p>Growth, mood, sleep, periods, headaches, sports injuries. Written so you can read it together if you want to.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ===== WHAT YOU CAN ASK ABOUT ===== -->
+  <section class="wrap section" id="asks">
+    <div class="section-head">
+      <span class="eyebrow">What you can ask about</span>
+      <h2>The things that come up at bedtime.</h2>
+      <p>Use it as often as you need. There is no charge per assessment and no wrong question.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-temp"/></svg></span><b>Fever</b><span>How high, how long, and what the number does and does not tell you.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-breath"/></svg></span><b>Coughs and breathing</b><span>Night coughs, wheeze, and the signs that breathing needs to be seen.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-rash"/></svg></span><b>Rashes and skin</b><span>What it looks like, whether it fades under pressure, and what that means.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-tummy"/></svg></span><b>Tummy and feeding</b><span>Being sick, loose nappies, refusing food, and staying hydrated.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-ear"/></svg></span><b>Ears and throat</b><span>Pain, pulling at an ear, hoarseness, and whether it needs a doctor.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-bump"/></svg></span><b>Bumps and falls</b><span>Head knocks, limps, and what to watch for over the next day.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-sleep"/></svg></span><b>Sleep</b><span>Waking, night terrors, and settling that has stopped working.</span></div>
+      <div class="tile"><span class="tile-ico"><svg class="icon"><use href="#i-mood"/></svg></span><b>Mood and behaviour</b><span>Changes you have noticed, and whether they fit the age.</span></div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
   <section class="wrap section" id="how">
     <div class="section-head">
-      <p class="eyebrow">How it works</p>
+      <span class="eyebrow">How it works</span>
       <h2>Three steps. The same every time.</h2>
     </div>
     <div class="steps">
       <div class="step">
+        <span class="step-n">1</span>
         <h3>Tell us what’s happening</h3>
-        <p>A short form. Which child, what you have noticed, how long it has been going on. Write it the way you would say it to a friend.</p>
+        <p>Pick the child. Write what you have noticed in your own words, and mark where it is on the body. It takes about two minutes.</p>
       </div>
       <div class="step">
+        <span class="step-n">2</span>
         <h3>Read what it means</h3>
-        <p>A report in plain language, written against guidance reviewed by paediatricians. It uses your words, not ours. Any medical term is explained the first time it appears.</p>
+        <p>A report comes back in plain language. It uses your words, not ours. Any medical term is explained the first time it appears.</p>
       </div>
       <div class="step">
+        <span class="step-n">3</span>
         <h3>Know what to do</h3>
-        <p>Concrete steps for tonight. Clear thresholds for when to seek care. And if you want a second opinion, a paediatrician is fifteen minutes away.</p>
+        <p>Concrete steps for tonight, and clear thresholds for seeking care. If you want a second opinion, a paediatrician is fifteen minutes away.</p>
       </div>
     </div>
   </section>
 
+  <!-- ===== FOUR PARTS ===== -->
+  <section class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">Every report, the same shape</span>
+      <h2>Four parts, in the same order, every time.</h2>
+      <p>You learn where to look. When you are tired at eleven at night, that matters.</p>
+    </div>
+    <div class="parts">
+      <div class="part p1"><span class="part-n">Part 1</span><h3>What you told us</h3><p>Your own words, read back to you. If we have misunderstood, you can see it straight away.</p></div>
+      <div class="part p2"><span class="part-n">Part 2</span><h3>What it likely means</h3><p>The most likely explanation, in plain language, written for your child's age.</p></div>
+      <div class="part p3"><span class="part-n">Part 3</span><h3>What to do now</h3><p>Specific actions for tonight and tomorrow, each with the reason underneath it.</p></div>
+      <div class="part p4"><span class="part-n">Part 4</span><h3>When to worry</h3><p>Numbers and thresholds, not vague symptoms. A line you can check against.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== MOCKUP ===== -->
+  <section class="wrap section" id="mockup">
+    <div class="section-head">
+      <span class="eyebrow">A worked example</span>
+      <h2>What you fill in, and what comes back.</h2>
+      <p>Amara, her parent, and every detail below are made up. The report reads the way a real one does.</p>
+    </div>
+
+    <div class="mock">
+      <!-- ---------- INTAKE FORM ---------- -->
+      <form class="sheet" aria-labelledby="intake-title"
+            onsubmit="event.preventDefault();document.getElementById('report').scrollIntoView({behavior:'smooth',block:'start'});">
+        <div class="sheet-bar">
+          <span class="bar-l"><svg><use href="#i-pen"/></svg><b>New assessment</b></span>
+          <span>Tuesday 8 September, 21:31</span>
+        </div>
+        <div class="sheet-body form">
+          <div class="form-intro">
+            <h3 id="intake-title">Tell us what’s happening</h3>
+            <p>Use your own words. You do not need the right terms. If you do not know an answer, leave it blank.</p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="flabel" style="margin-bottom:.5rem">Which child</legend>
+            <div class="kids">
+              <label class="kid"><input type="radio" name="child" checked><span class="avatar">A</span><b>Amara</b><span class="yrs">2y 4m</span></label>
+              <label class="kid k2"><input type="radio" name="child"><span class="avatar" style="background:var(--age-3)">T</span><b>Theo</b><span class="yrs">7y</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="flabel" for="what">What have you noticed <span class="fhint">Describe it the way you would to a friend</span></label>
+            <textarea id="what">She’s had a temperature since yesterday afternoon. Tonight it was 38.6. She’s off her food but she’s still drinking her milk. She’s got a cough that’s worse at night. She’s clingy and tired but she was still playing a bit this afternoon. Nobody else at home is ill.</textarea>
+          </div>
+
+          <fieldset class="field">
+            <legend class="flabel" style="margin-bottom:.5rem">Where is it <span class="fhint">Tap the part of the body</span></legend>
+            <div class="bodymap">
+              <div class="bm-figure">
+                <svg viewBox="0 0 170 280" role="img" aria-label="Outline of a child, front view">
+                  <rect class="bm-body" x="59" y="52" width="52" height="112" rx="24"/>
+                  <circle class="bm-body" cx="85" cy="34" r="24"/>
+                  <rect class="bm-body" x="32" y="66" width="15" height="80" rx="7.5"/>
+                  <rect class="bm-body" x="123" y="66" width="15" height="80" rx="7.5"/>
+                  <rect class="bm-body" x="64" y="158" width="17" height="106" rx="8.5"/>
+                  <rect class="bm-body" x="89" y="158" width="17" height="106" rx="8.5"/>
+                </svg>
+                <label class="spot" style="left:50%;top:12.1%"><input type="radio" name="where" aria-label="Head"><i></i></label>
+                <label class="spot" style="left:50%;top:35.7%"><input type="radio" name="where" aria-label="Chest and throat" checked><i></i></label>
+                <label class="spot" style="left:50%;top:50%"><input type="radio" name="where" aria-label="Tummy"><i></i></label>
+                <label class="spot" style="left:23%;top:37.5%"><input type="radio" name="where" aria-label="Arm"><i></i></label>
+                <label class="spot" style="left:42.6%;top:76.8%"><input type="radio" name="where" aria-label="Leg"><i></i></label>
+              </div>
+              <div class="bm-legend">
+                <b>Chest and throat</b>
+                <p>You marked the chest. The cough and the temperature are recorded against it.</p>
+                <span class="bm-picked"><svg class="icon" style="width:15px;height:15px"><use href="#i-check"/></svg> Selected</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="row2">
+            <div class="field">
+              <label class="flabel" for="since">How long has this been going on</label>
+              <select id="since">
+                <option>A few hours</option>
+                <option selected>Since yesterday</option>
+                <option>2 to 3 days</option>
+                <option>4 to 7 days</option>
+                <option>More than a week</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="flabel" for="temp">Highest temperature <span class="fhint">°C, if you took one</span></label>
+              <input type="text" id="temp" inputmode="decimal" value="38.6">
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="flabel">Drinking</span>
+            <div class="chips">
+              <label><input type="radio" name="drink">About normal</label>
+              <label><input type="radio" name="drink" checked>Less than usual</label>
+              <label><input type="radio" name="drink">Very little</label>
+              <label><input type="radio" name="drink">Refusing everything</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="flabel">Wet nappies today <span class="fhint">Since waking</span></span>
+            <div class="chips">
+              <label><input type="radio" name="wet">0 to 2</label>
+              <label><input type="radio" name="wet">3</label>
+              <label><input type="radio" name="wet" checked>4 or more</label>
+              <label><input type="radio" name="wet">Not sure</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="flabel">How is she in herself <span class="fhint">Choose all that fit</span></span>
+            <div class="chips">
+              <label><input type="checkbox" checked>Playing at times</label>
+              <label><input type="checkbox" checked>Clingy</label>
+              <label><input type="checkbox" checked>More tired than usual</label>
+              <label><input type="checkbox">Hard to wake</label>
+              <label><input type="checkbox">Crying that will not settle</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="flabel" for="else">Anything else <span class="fhint">Rash, being sick, medicines given, recent travel</span></label>
+            <input type="text" id="else" value="Gave paracetamol at 7pm. No rash that I can see.">
+          </div>
+
+          <div class="form-foot">
+            <p>Your answers are read back to you at the top of the report. If we have misunderstood something, you can correct it and send again.</p>
+            <button class="btn" type="submit">Send <svg><use href="#i-arrow"/></svg></button>
+          </div>
+        </div>
+      </form>
+
+      <div class="between"><span><svg><use href="#i-down"/></svg> A few minutes later</span></div>
+
+      <!-- ---------- REPORT ---------- -->
+      <article class="sheet" id="report" aria-labelledby="report-title">
+        <div class="sheet-bar">
+          <span class="bar-l"><svg><use href="#i-doc"/></svg><b>Your report</b></span>
+          <span>Tuesday 8 September, 21:38</span>
+        </div>
+        <div class="sheet-body">
+
+          <div class="rep-head">
+            <div class="rep-kid"><span class="avatar">A</span><b>Amara</b><span>2 years 4 months</span></div>
+            <h3 id="report-title">A fever and a night-time cough, since yesterday</h3>
+            <div class="rep-meta">
+              <span class="pill"><svg><use href="#i-temp"/></svg> Highest 38.6 °C</span>
+              <span class="pill"><svg><use href="#i-clock"/></svg> Second day</span>
+              <span class="pill pill-good"><svg><use href="#i-check"/></svg> No emergency signs reported</span>
+            </div>
+          </div>
+
+          <div class="vitals">
+            <div class="vital ok"><span class="vk">Drinking</span><span class="vv"><svg><use href="#i-check"/></svg> Still taking milk</span></div>
+            <div class="vital ok"><span class="vk">Alertness</span><span class="vv"><svg><use href="#i-check"/></svg> Playing at times</span></div>
+            <div class="vital watch"><span class="vk">Appetite</span><span class="vv"><svg><use href="#i-clock"/></svg> Off food, keep watching</span></div>
+          </div>
+
+          <!-- PART 1 -->
+          <section class="rsec r1">
+            <div class="rsec-head"><span class="rsec-badge">1</span><h4>What you told us</h4></div>
+            <div class="rsec-body">
+              <p class="quote">You told us Amara has had a temperature since yesterday afternoon. Tonight it was 38.6. She is off her food, but she is still drinking her milk. She has a cough that is worse at night. She is clingy and tired, and she was still playing a bit this afternoon. She has had four or more wet nappies today. You gave her paracetamol at seven this evening. You cannot see a rash. Nobody else at home is ill.</p>
+              <p class="aside">If any of that is wrong, go back and correct it. The rest of this report is built on it.</p>
+            </div>
+          </section>
+
+          <!-- PART 2 -->
+          <section class="rsec r2">
+            <div class="rsec-head"><span class="rsec-badge">2</span><h4>What it likely means</h4></div>
+            <div class="rsec-body">
+              <p>This looks like a common viral infection. A virus is a germ that antibiotics do not treat. Her body clears it on its own, usually within a week.</p>
+              <p>The fever is her body's response to the virus. It is not the illness itself. A temperature of 38.6 is ordinary for a child her age with a virus. The number matters less than how she is in herself.</p>
+
+              <div class="chart-card">
+                <div class="ct">
+                  <b>Amara's temperature, last 30 hours</b>
+                  <span>Seven readings you entered. The dashed line at 38.0 °C is where a temperature counts as a fever.</span>
+                </div>
+                <div class="chart-scroll">
+                  <svg viewBox="0 0 560 208" role="img" aria-label="Line chart of Amara's temperature over 30 hours. It rises from 37.9 at Monday 4pm to 38.2 by Monday evening, dips to 37.6 on Tuesday morning, then climbs through the day to 38.6 at Tuesday 9pm.">
+                    <line class="gridline" x1="42" y1="16" x2="544" y2="16"/>
+                    <line class="gridline" x1="42" y1="54" x2="544" y2="54"/>
+                    <line class="gridline" x1="42" y1="130" x2="544" y2="130"/>
+                    <line class="gridline" x1="42" y1="168" x2="544" y2="168"/>
+                    <text class="ax" x="36" y="20" text-anchor="end">39.0</text>
+                    <text class="ax" x="36" y="58" text-anchor="end">38.5</text>
+                    <text class="ax" x="36" y="96" text-anchor="end">38.0</text>
+                    <text class="ax" x="36" y="134" text-anchor="end">37.5</text>
+                    <text class="ax" x="36" y="172" text-anchor="end">37.0</text>
+
+                    <line class="thresh" x1="42" y1="92" x2="544" y2="92"/>
+                    <text class="thresh-lbl" x="540" y="108" text-anchor="end">Fever from 38.0</text>
+
+                    <path class="series" d="M42,99.6 L108.9,76.8 L159.1,92 L293,122.4 L376.7,84.4 L460.3,61.6 L527.3,46.4"/>
+                    <circle class="pt" cx="42" cy="99.6" r="4"/>
+                    <circle class="pt" cx="108.9" cy="76.8" r="4"/>
+                    <circle class="pt" cx="159.1" cy="92" r="4"/>
+                    <circle class="pt" cx="293" cy="122.4" r="4"/>
+                    <circle class="pt" cx="376.7" cy="84.4" r="4"/>
+                    <circle class="pt" cx="460.3" cy="61.6" r="4"/>
+                    <circle class="pt-last" cx="527.3" cy="46.4" r="6"/>
+                    <text class="pt-lbl" x="527.3" y="34" text-anchor="end">38.6</text>
+
+                    <text class="ax" x="42" y="188" text-anchor="start">Mon 4pm</text>
+                    <text class="ax" x="159" y="188" text-anchor="middle">Mon 11pm</text>
+                    <text class="ax" x="293" y="188" text-anchor="middle">Tue 7am</text>
+                    <text class="ax" x="544" y="188" text-anchor="end">Tue 9pm</text>
+                  </svg>
+                </div>
+              </div>
+
+              <p>The dip on Tuesday morning and the climb tonight is the usual shape. Fevers run higher in the evening. It does not mean she is getting worse.</p>
+              <p>The cough is worse at night because mucus runs down the back of the throat when she lies flat. That is expected.</p>
+              <p>Two things you told us matter most. She is still drinking. She was still playing. Those are the signs that tell you her body is coping.</p>
+              <p class="aside">Children under five typically have several infections like this a year. Going off food for a few days does no harm as long as she keeps drinking.</p>
+            </div>
+          </section>
+
+          <!-- PART 3 -->
+          <section class="rsec r3">
+            <div class="rsec-head"><span class="rsec-badge">3</span><h4>What to do now</h4></div>
+            <div class="rsec-body">
+              <ul class="todo">
+                <li><div><b>Offer milk or water every hour she is awake.</b><span class="why">Small amounts, often. A few sips count. Do not worry about food for now.</span></div></li>
+                <li><div><b>Give paracetamol only if she is uncomfortable.</b><span class="why">Use the dose on the packet for her weight, not her age. Leave at least four hours between doses, and no more than four doses in twenty-four hours. Treat how she feels, not the number on the thermometer.</span></div></li>
+                <li><div><b>Dress her in one light layer and keep the room cool.</b><span class="why">Do not point a fan at her and do not sponge her with cold water. Both make her shiver, which raises her temperature.</span></div></li>
+                <li><div><b>Check on her once during the night.</b><span class="why">You are looking at her breathing and her colour, not her temperature. Set an alarm if you need to.</span></div></li>
+                <li><div><b>Count wet nappies tomorrow.</b><span class="why">Four or more across the day is fine. Fewer than three is a threshold in the next section.</span></div></li>
+                <li><div><b>Keep her home tomorrow.</b><span class="why">She can go back to nursery twenty-four hours after her temperature settles without paracetamol.</span></div></li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- PART 4 -->
+          <section class="rsec r4">
+            <div class="rsec-head"><span class="rsec-badge">4</span><h4>When to worry</h4></div>
+            <div class="rsec-body">
+              <p>Each of these is a line, not a feeling. If she crosses one, act on it. If she crosses none, what you are doing is enough.</p>
+
+              <div class="tier t-warn">
+                <div class="tier-head"><svg><use href="#i-clock"/></svg><b>Have her seen the same day</b></div>
+                <ul>
+                  <li><span class="k">Fewer than 3</span><span class="d">wet nappies in twenty-four hours, or no wet nappy for twelve hours.</span></li>
+                  <li><span class="k">5 days</span><span class="d">of temperature at 38.0 or above, without a full day below it.</span></li>
+                  <li><span class="k">6 hours</span><span class="d">without keeping any fluid down.</span></li>
+                  <li><span class="k">Ear pain</span><span class="d">that wakes her, or fluid coming from an ear.</span></li>
+                </ul>
+              </div>
+
+              <div class="tier t-urgent">
+                <div class="tier-head"><svg><use href="#i-alert"/></svg><b>Call an ambulance. Do not wait to see if it passes.</b></div>
+                <ul>
+                  <li><span class="k">Breathing</span><span class="d">that pulls the skin in between or under her ribs, or is fast enough that she cannot feed or talk.</span></li>
+                  <li><span class="k">A rash</span><span class="d">that does not fade when you press the side of a clear glass firmly against it.</span></li>
+                  <li><span class="k">Hard to wake</span><span class="d">or awake but not responding to you the way she usually does.</span></li>
+                  <li><span class="k">Cold hands and feet</span><span class="d">while her body is hot, with pale, grey, or blotchy skin.</span></li>
+                  <li><span class="k">A fit</span><span class="d">or shaking she cannot be roused from.</span></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- NEXT STEP -->
+          <div class="next">
+            <span class="eyebrow">Next step</span>
+            <h4>Book fifteen minutes with a paediatrician.</h4>
+            <p>They will have read this report before the call. Tell them what has changed since you wrote it, and ask what you are unsure about.</p>
+            <a class="btn" href="#book">Book fifteen minutes with a paediatrician <svg><use href="#i-arrow"/></svg></a>
+            <small>Included in your subscription. Next available slot: tomorrow, 08:20.</small>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
   <section class="wrap section" id="plan">
     <div class="section-head">
-      <p class="eyebrow">What it costs</p>
+      <span class="eyebrow">What it costs</span>
       <h2>One fee a year. Every child in your home.</h2>
+      <p>There is no charge per child and no charge per report. Cancel at the end of the year if it has not earned its place.</p>
     </div>
-    <div class="plan">
-      <div class="price">
-        <div class="amount">£96 <small>a year, for the household</small></div>
-        <p>There is no per-child charge and no per-report charge. Use it as often as you need. Cancel at the end of the year if it has not earned its place.</p>
+    <div class="price-card">
+      <div class="price-l">
+        <span class="eyebrow">Family subscription</span>
+        <div class="price-amt">£96<sub>a year</sub></div>
+        <p>Covers every child under sixteen living at your address, however many there are.</p>
+        <div class="household">
+          <span class="avatar">A</span>
+          <span class="avatar" style="background:var(--age-3)">T</span>
+          <span class="more">+ any more</span>
+        </div>
       </div>
-      <dl class="plan-terms">
-        <div><dt>Children covered</dt><dd>All children under sixteen living at your address</dd></div>
-        <div><dt>Assessments</dt><dd>Unlimited</dd></div>
-        <div><dt>Paediatrician calls</dt><dd>Fifteen minutes, booked from any report</dd></div>
-        <div><dt>Billing</dt><dd>Once a year. No other charges.</dd></div>
-      </dl>
+      <div class="price-r">
+        <h3>What is included</h3>
+        <ul class="incl">
+          <li><svg><use href="#i-check"/></svg><span><b>Unlimited assessments.</b> Use it as often as you need, at any hour.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>Every child under sixteen</b> at your address, added at any time.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>Fifteen minutes with a paediatrician,</b> booked from any report.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>A record you keep.</b> Every report stays, so you can see what happened last time.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>Billed once a year.</b> No other charges.</span></li>
+        </ul>
+        <a class="btn" href="#start" style="justify-self:start">Start an assessment <svg><use href="#i-arrow"/></svg></a>
+      </div>
     </div>
-  </section>
-
-  <section class="wrap section sample" id="sample">
-    <div class="section-head">
-      <p class="eyebrow">A sample</p>
-      <h2>What you fill in, and what comes back</h2>
-      <p class="intro">This is a worked example. Amara, her parent, and every detail below are made up. The report reads the way a real one does.</p>
-      <p class="sample-note">Example. Not medical advice for your child.</p>
-    </div>
-
-    <!-- ===================== INTAKE FORM ===================== -->
-    <form class="sheet" id="intake" aria-labelledby="intake-title" onsubmit="event.preventDefault(); document.getElementById('report').scrollIntoView({behavior: 'smooth', block: 'start'});">
-      <div class="sheet-bar">
-        <span><strong>New assessment</strong></span>
-        <span>Tuesday 8 September, 21:31</span>
-      </div>
-      <div class="sheet-body form">
-        <div>
-          <h3 id="intake-title">Tell us what’s happening</h3>
-          <p class="help">Use your own words. You do not need the right terms. If you do not know an answer, leave it blank.</p>
-        </div>
-
-        <fieldset class="field" style="border:0;padding:0;margin:0;">
-          <legend class="label" style="padding:0;margin-bottom:0.45rem;">Which child</legend>
-          <div class="children">
-            <label><input type="radio" name="child" value="amara" checked> Amara <span class="age">2 years 4 months</span></label>
-            <label><input type="radio" name="child" value="theo"> Theo <span class="age">7 years</span></label>
-          </div>
-        </fieldset>
-
-        <div class="field">
-          <label for="what">What have you noticed <span class="hint">Describe it the way you would to a friend</span></label>
-          <textarea id="what" name="what">She’s had a temperature since yesterday afternoon. Tonight it was 38.6. She’s off her food but she’s still drinking her milk. She’s got a cough that’s worse at night. She’s clingy and tired but she was still playing a bit this afternoon. Nobody else at home is ill.</textarea>
-        </div>
-
-        <div class="row-2">
-          <div class="field">
-            <label for="since">How long has this been going on</label>
-            <select id="since" name="since">
-              <option>A few hours</option>
-              <option selected>Since yesterday</option>
-              <option>2 to 3 days</option>
-              <option>4 to 7 days</option>
-              <option>More than a week</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="temp">Highest temperature, if you took one <span class="hint">°C</span></label>
-            <input type="text" id="temp" name="temp" inputmode="decimal" value="38.6">
-          </div>
-        </div>
-
-        <div class="field">
-          <span class="label">Drinking</span>
-          <div class="choices">
-            <label><input type="radio" name="drinking" value="normal"> About normal</label>
-            <label><input type="radio" name="drinking" value="less" checked> Less than usual</label>
-            <label><input type="radio" name="drinking" value="little"> Very little</label>
-            <label><input type="radio" name="drinking" value="none"> Refusing everything</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <span class="label">Wet nappies or trips to the toilet today <span class="hint">Since waking</span></span>
-          <div class="choices">
-            <label><input type="radio" name="wet" value="0-2"> 0 to 2</label>
-            <label><input type="radio" name="wet" value="3"> 3</label>
-            <label><input type="radio" name="wet" value="4+" checked> 4 or more</label>
-            <label><input type="radio" name="wet" value="unsure"> Not sure</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <span class="label">How is she in herself <span class="hint">Choose all that fit</span></span>
-          <div class="choices">
-            <label><input type="checkbox" name="self" value="playing" checked> Playing at times</label>
-            <label><input type="checkbox" name="self" value="clingy" checked> Clingy</label>
-            <label><input type="checkbox" name="self" value="tired" checked> More tired than usual</label>
-            <label><input type="checkbox" name="self" value="hard-to-wake"> Hard to wake</label>
-            <label><input type="checkbox" name="self" value="crying"> Crying that will not settle</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="else">Anything else <span class="hint">Rash, vomiting, breathing, recent travel, medicines given</span></label>
-          <input type="text" id="else" name="else" value="Gave paracetamol at 7pm. No rash that I can see.">
-        </div>
-
-        <div class="form-foot">
-          <p>Your answers are read back to you at the top of the report. If we have misunderstood something, you can correct it and send again.</p>
-          <button class="btn" type="submit">Send</button>
-        </div>
-      </div>
-    </form>
-
-    <div class="then"><span>A few minutes later</span></div>
-
-    <!-- ===================== SAMPLE REPORT ===================== -->
-    <article class="sheet report" id="report" aria-labelledby="report-title">
-      <div class="sheet-bar">
-        <span><strong>Your report</strong></span>
-        <span>Tuesday 8 September, 21:38</span>
-      </div>
-      <div class="sheet-body">
-        <div class="report-head">
-          <p class="eyebrow">Amara, 2 years 4 months</p>
-          <h3 id="report-title">A fever and a night-time cough, since yesterday</h3>
-          <div class="report-meta">
-            <span>Highest temperature 38.6 °C</span>
-            <span>Second day</span>
-            <span>Written against guidance reviewed by paediatricians</span>
-          </div>
-        </div>
-
-        <section class="rsec">
-          <div class="rlabel">
-            <span>Section 1</span>
-            <h4>What you told us</h4>
-          </div>
-          <div class="rbody">
-            <div class="told">
-              <p>You told us Amara has had a temperature since yesterday afternoon. Tonight it was 38.6. She is off her food, but she is still drinking her milk. She has a cough that is worse at night. She is clingy and tired, and she was still playing a bit this afternoon. She has had four or more wet nappies today. You gave her paracetamol at seven this evening. You cannot see a rash. Nobody else at home is ill.</p>
-            </div>
-            <p class="aside">If any of that is wrong, go back and correct it. The rest of this report is built on it.</p>
-          </div>
-        </section>
-
-        <section class="rsec">
-          <div class="rlabel">
-            <span>Section 2</span>
-            <h4>What it likely means</h4>
-          </div>
-          <div class="rbody">
-            <p>This looks like a common viral infection. A virus is a germ that antibiotics do not treat. Her body clears it on its own, usually within a week.</p>
-            <p>The fever is her body's response to the virus. It is not the illness itself. A fever at 38.6 is ordinary for a child her age with a virus. The number matters less than how she is in herself.</p>
-            <p>The cough is worse at night because mucus runs down the back of the throat when she lies flat. That is expected and it is not a sign the cough is getting worse.</p>
-            <p>Two things you told us matter most. She is still drinking. She was still playing. Those are the signs that tell you her body is coping.</p>
-            <p class="aside">Children under five typically have several infections like this a year. Going off food for a few days does no harm as long as she keeps drinking.</p>
-          </div>
-        </section>
-
-        <section class="rsec">
-          <div class="rlabel">
-            <span>Section 3</span>
-            <h4>What to do now</h4>
-          </div>
-          <div class="rbody">
-            <ul class="todo">
-              <li><div><strong>Offer milk or water every hour she is awake.</strong><span class="why">Small amounts, often. A few sips count. Do not worry about food for now.</span></div></li>
-              <li><div><strong>Give paracetamol only if she is uncomfortable.</strong><span class="why">Use the dose on the packet for her weight, not her age. Leave at least four hours between doses, and no more than four doses in twenty-four hours. Treat how she feels, not the number on the thermometer.</span></div></li>
-              <li><div><strong>Dress her in one light layer.</strong><span class="why">Keep the room cool. Do not point a fan at her and do not sponge her with cold water. Both make her shiver, which raises her temperature.</span></div></li>
-              <li><div><strong>Check on her once during the night.</strong><span class="why">You are looking at her breathing and her colour, not her temperature. Set an alarm if you need to.</span></div></li>
-              <li><div><strong>Count wet nappies tomorrow.</strong><span class="why">Four or more in the day is fine. Fewer than three is a threshold in the next section.</span></div></li>
-              <li><div><strong>Keep her home tomorrow.</strong><span class="why">She can go back to nursery twenty-four hours after her temperature settles without paracetamol.</span></div></li>
-            </ul>
-          </div>
-        </section>
-
-        <section class="rsec">
-          <div class="rlabel">
-            <span>Section 4</span>
-            <h4>When to worry</h4>
-          </div>
-          <div class="rbody">
-            <p>Each of these is a line, not a feeling. If she crosses one, act on it. If she crosses none, what you are doing is enough.</p>
-            <dl class="thresholds">
-              <div><dt>Fewer than 3</dt><dd>wet nappies in twenty-four hours, or no wet nappy for twelve hours.</dd></div>
-              <div><dt>5 days</dt><dd>of temperature at 38 or above, without a full day below it.</dd></div>
-              <div><dt>6 hours</dt><dd>without keeping any fluid down.</dd></div>
-              <div><dt>Breathing</dt><dd>that pulls the skin in between or under her ribs, or is fast enough that she cannot feed or talk.</dd></div>
-              <div><dt>A rash</dt><dd>that does not fade when you press the side of a clear glass firmly against it.</dd></div>
-              <div><dt>Hard to wake</dt><dd>or awake but not responding to you the way she usually does.</dd></div>
-              <div><dt>Cold hands and feet</dt><dd>while her body is hot, with pale, grey, or blotchy skin.</dd></div>
-            </dl>
-            <div class="escalate">
-              <p><strong>Fewer nappies, five days of fever, or six hours without fluid:</strong> arrange for her to be seen the same day.</p>
-              <p><strong>Breathing, a rash that does not fade, hard to wake, or cold hands and feet:</strong> call an ambulance. Do not wait to see if it passes.</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="next">
-          <p class="eyebrow">Next step</p>
-          <h4>Book fifteen minutes with a paediatrician.</h4>
-          <p>They will have read this report before the call. Tell them what has changed since you wrote it, and ask what you are unsure about.</p>
-          <a class="btn" href="#book">Book fifteen minutes with a paediatrician</a>
-          <small>Included in your subscription. Next available slot: tomorrow, 08:20.</small>
-        </div>
-      </div>
-    </article>
   </section>
 </main>
 
-<footer class="wrap footer">
-  <p class="about">Bedside is guidance for parents. It is not a diagnosis and it does not replace a doctor who can see your child. If you think your child is seriously unwell, call an ambulance. You do not need our report to do that.</p>
-  <div class="footer-row">
-    <span>Bedside Health Ltd</span>
-    <a href="#privacy">Privacy</a>
-    <a href="#terms">Terms</a>
-    <a href="#guidance">How our guidance is reviewed</a>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div class="safety">
+      <svg><use href="#i-alert"/></svg>
+      <p><b>Bedside is guidance, not a diagnosis.</b> It does not replace a doctor who can see your child. If you think your child is seriously unwell, call an ambulance. You do not need our report to do that.</p>
+    </div>
+    <div class="footer-row">
+      <span>Bedside Health Ltd</span>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+      <a href="#guidance">How our guidance is reviewed</a>
+      <a href="#clinicians">Our paediatricians</a>
+    </div>
   </div>
 </footer>
 
