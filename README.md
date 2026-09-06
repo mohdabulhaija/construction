@@ -70,3 +70,21 @@ The deck uses a fixed light palette rather than the site's light/dark tokens, be
 The kit deliberately rejects the standard playbook for this category (alarm hooks, "the mistake most parents make", tribal splits). A brand promising not to raise a parent's temperature cannot market by raising it. Hooks are built on recognition instead: the parent sees their own eleven-at-night described accurately.
 
 Two gates before anything is posted, both noted in the kit: a paediatrician signs off every clinical line, and UAE health-marketing rules (DHA / DoH) are checked first.
+
+## Arabic campaign posts
+
+`campaign-ar/` holds three Instagram posts at 1080x1350, designed Arabic-first (RTL, Eastern Arabic numerals, IBM Plex Sans Arabic throughout).
+
+They run as a sequence, not three standalone posts: recognition, then proof, then the offer.
+
+1. `01-recognition.png` — the 11pm question. Dark, quiet, no product.
+2. `02-thresholds.png` — four things to check. The saveable one.
+3. `03-offer.png` — why parents wait, and the AED 399 answer.
+
+`posts-ar.html` is the source. To re-render after editing:
+
+```
+node shot_posts.js   # writes bedside-ar-post{1,2,3}.png at 1080x1350
+```
+
+Copy addresses mothers in the second person, matching the primary buyer. Switching to masculine or neutral is a small edit per line and is flagged in the handover notes.
