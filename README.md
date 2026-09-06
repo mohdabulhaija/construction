@@ -62,3 +62,11 @@ node tools-render-pdf.js "$PWD/deck.html" "$PWD/Bedside-Pitch-Deck.pdf"
 ```
 
 The deck uses a fixed light palette rather than the site's light/dark tokens, because a PDF has one visual world. Slide size is set with `@page { size: 1280px 720px }` and rendered with `preferCSSPageSize`.
+
+## Social kit
+
+`social-kit.html` holds the launch social samples: Reel and TikTok scripts with shot lists, two Instagram carousels, a single post, LinkedIn, an X thread, and Arabic versions, plus visual previews of the card designs.
+
+The kit deliberately rejects the standard playbook for this category (alarm hooks, "the mistake most parents make", tribal splits). A brand promising not to raise a parent's temperature cannot market by raising it. Hooks are built on recognition instead: the parent sees their own eleven-at-night described accurately.
+
+Two gates before anything is posted, both noted in the kit: a paediatrician signs off every clinical line, and UAE health-marketing rules (DHA / DoH) are checked first.

@@ -1,0 +1,424 @@
+<title>Bedside Social Kit</title>
+<style>
+:root{
+  --ground:#F0F1F9; --sheet:#FFFFFF; --sheet-2:#F7F7FC;
+  --ink:#191B38; --ink-2:#4A4D70; --muted:#737699;
+  --line:#DEDFEE; --line-2:#C4C6DE;
+  --brand:#6D28D9; --brand-2:#8B5CF6; --brand-soft:#EEE9FD; --brand-line:#C9B8F5;
+  --hero-1:#211A4E; --hero-2:#3E2A80; --hero-ink:#FFFFFF; --hero-ink-2:#C7C0E6;
+  --hero-line:rgba(255,255,255,.16); --hero-chip:rgba(255,255,255,.10);
+  --s1:#D97706; --s2:#0F8A78; --s3:#2563EB; --s4:#D6336C;
+  --s1-soft:#FDF1E1; --s2-soft:#E2F3F0; --s3-soft:#E7EDFD; --s4-soft:#FCE9F0;
+  --good:#0F7A5F; --good-soft:#E3F2EC;
+  --warn:#B45309; --warn-soft:#FBEEDD; --warn-line:#E7C69C;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Figtree","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --ar:"Noto Kufi Arabic","Segoe UI",Tahoma,sans-serif;
+  --r:14px;
+  --shadow:0 1px 2px rgba(25,27,56,.05), 0 8px 24px -12px rgba(25,27,56,.16);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+  --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+  --line:#2B2E45; --line-2:#3D4160;
+  --brand:#A78BFA; --brand-2:#C4B5FD; --brand-soft:#241E3F; --brand-line:#4C3E85;
+  --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+  --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+  --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+  --good:#4FBF9A; --good-soft:#12291F;
+  --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+  --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+  --line:#2B2E45; --line-2:#3D4160;
+  --brand:#A78BFA; --brand-2:#C4B5FD; --brand-soft:#241E3F; --brand-line:#4C3E85;
+  --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+  --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+  --s1-soft:#302510; --s2-soft:#0F2A25; --s3-soft:#16233C; --s4-soft:#331623;
+  --good:#4FBF9A; --good-soft:#12291F;
+  --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:16.5px;line-height:1.58;-webkit-font-smoothing:antialiased}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;letter-spacing:-.012em}
+:focus-visible{outline:2.5px solid var(--brand);outline-offset:2px}
+.page{width:min(100% - 2.5rem, 60rem);margin:0 auto;padding-bottom:4rem}
+
+.masthead{background:linear-gradient(158deg,var(--hero-1),var(--hero-2) 70%,#4B2F94);
+  color:var(--hero-ink);border-radius:0 0 26px 26px;margin-bottom:2.25rem}
+.masthead-in{width:min(100% - 2.5rem, 60rem);margin:0 auto;padding:1.5rem 0 2rem;display:grid;gap:1rem}
+.mh-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.78rem;color:var(--hero-ink-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.masthead h1{font-size:clamp(1.55rem,1.2rem + 1.5vw,2.1rem);color:var(--hero-ink);max-width:26ch;
+  font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 60}
+.masthead p{color:var(--hero-ink-2);max-width:62ch;font-size:1rem}
+
+.sec{margin-bottom:2.4rem}
+.sec-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:1rem;
+  padding-bottom:.55rem;border-bottom:2px solid var(--line)}
+.sec-n{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:var(--brand);flex:none}
+.sec-head h2{font-size:1.28rem}
+.body{display:grid;gap:.85rem;max-width:68ch}
+.body p{color:var(--ink-2)}
+strong{color:var(--ink);font-weight:700}
+
+/* rule box */
+.rulebox{background:var(--brand-soft);border-left:3px solid var(--brand);border-radius:0 12px 12px 0;
+  padding:1.1rem 1.3rem;display:grid;gap:.6rem;max-width:68ch}
+.rulebox b{color:var(--ink)}
+.rulebox p{color:var(--ink-2);font-size:.97rem}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.pil{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.05rem;
+  display:grid;gap:.35rem;align-content:start;border-top:4px solid var(--pc)}
+.pil .k{font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pc)}
+.pil b{font-size:1rem;color:var(--ink)}
+.pil span{font-size:.9rem;color:var(--ink-2);line-height:1.45}
+.q1{--pc:var(--s1)}.q2{--pc:var(--s2)}.q3{--pc:var(--s3)}.q4{--pc:var(--s4)}
+@media (max-width:860px){.pillars{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.pillars{grid-template-columns:1fr}}
+
+/* post card */
+.post{background:var(--sheet);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  margin-bottom:1.1rem;box-shadow:var(--shadow)}
+.post-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  padding:.85rem 1.2rem;background:var(--sheet-2);border-bottom:1px solid var(--line)}
+.plat{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--brand)}
+.plat i{width:9px;height:9px;border-radius:50%;background:var(--brand);display:block}
+.post-bar .why{font-size:.83rem;color:var(--muted);font-weight:600}
+.post-in{padding:1.2rem 1.3rem;display:grid;gap:1rem}
+.post-in h3{font-family:var(--display);font-size:1.1rem}
+
+.copy{background:var(--sheet-2);border:1px solid var(--line);border-radius:10px;
+  padding:1rem 1.15rem;font-size:1rem;line-height:1.62;color:var(--ink);white-space:pre-wrap}
+.copy.ar{direction:rtl;text-align:right;font-family:var(--ar);line-height:1.9}
+.lbl{font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.4rem;display:block}
+
+/* shot list */
+.shots{display:grid;gap:.5rem}
+.shot{display:grid;grid-template-columns:5.2rem 1fr;gap:1rem;font-size:.95rem;
+  padding:.6rem 0;border-bottom:1px solid var(--line)}
+.shot:last-child{border-bottom:0}
+.shot .t{font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums;font-size:.88rem}
+.shot .d{color:var(--ink-2)}
+.shot .d b{color:var(--ink)}
+
+/* carousel preview */
+.carousel{display:flex;gap:.7rem;overflow-x:auto;padding-bottom:.5rem}
+.card45{width:190px;flex:none;aspect-ratio:4/5;border-radius:12px;padding:18px;
+  display:grid;align-content:space-between;border:1px solid var(--line)}
+.card45.dark{background:linear-gradient(158deg,var(--hero-1),var(--hero-2));color:#fff;border-color:transparent}
+.card45.light{background:var(--sheet)}
+.card45 .n{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.62}
+.card45 .t{display:block;font-family:var(--display);font-size:16px;font-weight:600;line-height:1.22;
+  font-variation-settings:"SOFT" 45,"WONK" 1,"opsz" 24}
+.card45 .s{display:block;font-size:11px;line-height:1.45;opacity:.78;margin-top:6px}
+.card45 .wm{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.55}
+.card45.light .t{color:var(--ink)}
+.card45.light .s{color:var(--ink-2)}
+.card45 .big{display:block;font-family:var(--sans);font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1;
+  color:var(--s4)}
+.card45.dark .big{color:var(--brand-2)}
+
+/* reel frame */
+.reelrow{display:flex;gap:.8rem;overflow-x:auto;padding-bottom:.5rem}
+.frame916{width:150px;flex:none;aspect-ratio:9/16;border-radius:14px;padding:16px;
+  display:grid;align-content:end;gap:6px;background:linear-gradient(170deg,#2A2159,#150F35 65%);color:#fff;
+  border:1px solid var(--line)}
+.frame916 .ov{font-family:var(--display);font-size:15px;font-weight:600;line-height:1.2;
+  font-variation-settings:"SOFT" 45,"WONK" 1,"opsz" 24}
+.frame916 .tc{font-size:9.5px;font-weight:800;letter-spacing:.1em;opacity:.55;text-transform:uppercase}
+
+/* compliance */
+.flag{background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:var(--r);
+  padding:1.15rem 1.3rem;display:grid;gap:.7rem}
+.flag b.h{color:var(--warn);font-size:1rem}
+.flag ol{margin:0;padding-left:1.2rem;display:grid;gap:.45rem;color:var(--ink-2);font-size:.95rem}
+.flag li::marker{color:var(--warn);font-weight:700}
+
+.foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap">
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="mh-top"><span>Bedside &middot; Social kit</span><span>UAE launch</span></div>
+    <h1>Posts that sound like the product.</h1>
+    <p>Ten samples across Reels, carousels, TikTok, LinkedIn and X, plus Arabic. Every one is built from the same four pain points the product solves.</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- 0. THE RULE -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">00</span><h2>One rule that shapes all of it</h2></div>
+    <div class="rulebox">
+      <b>We do not use fear to sell calm.</b>
+      <p>The standard playbook for this category is alarm: what most parents get wrong, the sign you are missing, the mistake that could cost you. It works on the feed and it is wrong for us. Our entire promise is that we will not raise a parent's temperature. A brand that markets by frightening people cannot then be trusted to settle them.</p>
+      <p><strong>So the hook is recognition, not alarm.</strong> A parent stops scrolling because they see their own eleven-at-night described exactly, not because we have told them their child might be dying. Recognition holds attention just as well and it is the only hook that survives contact with the product.</p>
+    </div>
+  </section>
+
+  <!-- 1. PILLARS -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">01</span><h2>Four pillars, from four real pain points</h2></div>
+    <div class="pillars">
+      <div class="pil q1"><span class="k">Pillar 1</span><b>The 11pm moment</b><span>Recognition. We describe the night they have already had. No advice, no product, just accuracy.</span></div>
+      <div class="pil q2"><span class="k">Pillar 2</span><b>Give away the thresholds</b><span>The most valuable thing we own, posted free. It proves the product better than any claim about it.</span></div>
+      <div class="pil q3"><span class="k">Pillar 3</span><b>Quiet myth correction</b><span>What the number does not mean. Calm, correct, saveable. Never a scold.</span></div>
+      <div class="pil q4"><span class="k">Pillar 4</span><b>The cost of asking</b><span>Why parents wait until they are frightened, and why a flat fee changes the timing.</span></div>
+    </div>
+  </section>
+
+  <!-- 2. POSTS -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">02</span><h2>The posts</h2></div>
+
+    <!-- P1 REEL -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>Reel / TikTok &middot; 18 sec</span><span class="why">Pillar 1 &middot; Recognition</span></div>
+      <div class="post-in">
+        <h3>Three options at eleven at night</h3>
+        <div class="reelrow">
+          <div class="frame916"><span class="tc">0:00</span><span class="ov">38.6, at eleven at night.</span></div>
+          <div class="frame916"><span class="tc">0:03</span><span class="ov">You have three options.</span></div>
+          <div class="frame916"><span class="tc">0:11</span><span class="ov">None of them answer the only question you have.</span></div>
+          <div class="frame916"><span class="tc">0:16</span><span class="ov">Tell us what’s happening. We’ll tell you what it means.</span></div>
+        </div>
+        <div>
+          <span class="lbl">Shot list</span>
+          <div class="shots">
+            <div class="shot"><span class="t">0:00</span><span class="d">Dark room, phone light on a sleeping child's face. Text: <b>38.6, at eleven at night.</b> No music yet.</span></div>
+            <div class="shot"><span class="t">0:03</span><span class="d">Parent sitting on the floor outside the door. Text: <b>You have three options.</b></span></div>
+            <div class="shot"><span class="t">0:05</span><span class="d">Phone screen, search results. Text: <b>Search it. Every answer is the worst one.</b></span></div>
+            <div class="shot"><span class="t">0:08</span><span class="d">Clock. Text: <b>Wait for a doctor. The night is already over.</b></span></div>
+            <div class="shot"><span class="t">0:10</span><span class="d">Empty waiting room chairs. Text: <b>Go to emergency. Sit for four hours.</b></span></div>
+            <div class="shot"><span class="t">0:12</span><span class="d">Back to the parent. Text: <b>None of them answer the only question you have. Is this ordinary, or is this the night I act?</b></span></div>
+            <div class="shot"><span class="t">0:16</span><span class="d">Product: report on screen, four coloured sections. End card with the line.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="lbl">Caption</span>
+          <div class="copy">Every parent has had this night.
+
+You are not looking for a diagnosis at eleven at night. You are looking for one thing: is this ordinary, or is this the night I act.
+
+Bedside answers that. You describe what you are seeing, in your own words. You get back what it likely means, what to do tonight, and the exact point at which to have them seen.
+
+One fee a year. Every child in the house.
+
+#parentsofdubai #dubaimums #uaeparents #newmum #toddlerlife</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 CAROUSEL -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>Instagram carousel &middot; 8 slides</span><span class="why">Pillar 2 &middot; The giveaway</span></div>
+      <div class="post-in">
+        <h3>A fever is not the emergency. These six things are.</h3>
+        <div class="carousel">
+          <div class="card45 dark"><span class="n">Save this</span><span class="t">A fever is not the emergency.<br>These six things are.</span><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">01</span><div><span class="big">Under 3</span><span class="t" style="font-size:14px;margin-top:6px;display:block">wet nappies in 24 hours</span><span class="s">Or no wet nappy for twelve hours.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">02</span><div><span class="t">Breathing that pulls the skin in under the ribs</span><span class="s">Or is too fast for them to feed or talk.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">03</span><div><span class="t">A rash that does not fade under a pressed glass</span><span class="s">Press the side of a clear glass firmly against it.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">04</span><div><span class="t">Hard to wake, or not responding the way they usually do</span><span class="s">You know their normal. Trust it.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">05</span><div><span class="t">Cold hands and feet while the body is hot</span><span class="s">With pale, grey or blotchy skin.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">06</span><div><span class="big">5 days</span><span class="t" style="font-size:14px;margin-top:6px;display:block">at 38 or above</span><span class="s">Without a full day below it.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 dark"><span class="n">If none of these</span><span class="t">What you are doing is probably enough.</span><span class="wm">Bedside</span></div>
+        </div>
+        <div>
+          <span class="lbl">Caption</span>
+          <div class="copy">Most parents watch their child all night without knowing what they are watching for.
+
+These are the lines. Not feelings, not "seems worse" — six things you can actually check. If your child crosses one, act on it. If they cross none, what you are doing is probably enough.
+
+Save it now so you have it at three in the morning.
+
+This is general guidance for children, not advice about your child. If you are worried, have them seen. If you think it is serious, call an ambulance. You do not need anyone's permission for that.
+
+#uaeparents #dubaimums #abudhabimums #toddlerfever #parentingtips</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 CAROUSEL 2 -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>Instagram carousel &middot; 6 slides</span><span class="why">Pillar 3 &middot; Myth correction</span></div>
+      <div class="post-in">
+        <h3>What the thermometer does not tell you</h3>
+        <div class="carousel">
+          <div class="card45 dark"><span class="n">Fever</span><span class="t">What the number does not tell you.</span><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">01</span><div><span class="t">38.6 is not worse than 38.1</span><span class="s">The number tells you the body is fighting something. It does not tell you what, or how serious.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">02</span><div><span class="t">A child at 39 who is drinking and playing is doing better than a child at 38 who will not wake</span><span class="s">How they are matters more than what they read.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">03</span><div><span class="t">Paracetamol is for comfort, not for the reading</span><span class="s">Treat how they feel. Not the number.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light"><span class="n">04</span><div><span class="t">Watch three things instead</span><span class="s">Are they drinking. Are they alert. How are they breathing.</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 dark"><span class="n">Bedside</span><span class="t">Tell us what’s happening. We’ll tell you what it means.</span><span class="wm">One fee a year</span></div>
+        </div>
+        <div>
+          <span class="lbl">Caption</span>
+          <div class="copy">Parents check the thermometer every twenty minutes because it is the one thing that gives a number. It is also the least useful thing in the room.
+
+Drinking, alertness, breathing. Those three tell you more than any reading, and they are free to check.
+
+Save this for the next time you are standing in the dark holding a thermometer.
+
+#dubaimums #uaeparents #momlife #toddlerfever</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 SINGLE -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>Instagram single / Snapchat</span><span class="why">Pillar 4 &middot; The cost of asking</span></div>
+      <div class="post-in">
+        <h3>The cheapest moment to ask is the first moment you wonder</h3>
+        <div class="carousel">
+          <div class="card45 dark"><span class="n">Why parents wait</span><span class="t">Asking costs money. So you wait until you are frightened enough to justify it.</span><span class="wm">Bedside</span></div>
+        </div>
+        <div>
+          <span class="lbl">Caption</span>
+          <div class="copy">A question costs AED 100 in co-pay. Sometimes AED 300.
+
+So you wait. You tell yourself you will see how the night goes. You wait until you are worried enough to justify the money, which is exactly the point at which waiting stops being sensible.
+
+That is backwards, and it is the pricing that made it backwards.
+
+Bedside is one fee a year for the whole household. Ask at nine. Ask again at midnight. It costs the same.
+
+#uaeparents #dubaifamilies #parentinguae</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 LINKEDIN -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>LinkedIn</span><span class="why">Founder voice &middot; The gap</span></div>
+      <div class="post-in">
+        <h3>The empty corner</h3>
+        <div class="copy">We mapped every option a parent has at eleven at night on two axes: how fast you get an answer, and how complete that answer is.
+
+Search is instant and nearly useless. A clinic appointment is complete and days away. The emergency room answers everything, after four hours and AED 800 to 2,000. Teleconsultation comes closest, and costs AED 149 to 185 every single time you ask.
+
+The fast-and-complete corner was empty.
+
+Not because it is hard to fill. Because the economics of everything in that market meter the parent per question, and a parent who is charged per question waits until they are frightened. That is the most expensive moment for everyone: for the family, for the clinic, for the insurer.
+
+Bedside is one flat fee a year for the whole household. Unlimited written assessments. The point of the pricing is not that it is cheap. The point is that it removes the reason to wait.
+
+We are launching in the UAE first.</div>
+      </div>
+    </div>
+
+    <!-- P6 X -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>X thread &middot; 5 posts</span><span class="why">Pillar 2 &middot; The giveaway</span></div>
+      <div class="post-in">
+        <div class="copy">Most parents sit up all night watching a feverish child without knowing what they are watching for.
+
+Here are the actual lines.
+
+
+Fewer than three wet nappies in twenty-four hours. Or none for twelve hours.
+
+Dehydration is the thing that turns an ordinary virus into a hospital visit, and nappies are how you catch it early.
+
+
+Breathing that pulls the skin in under or between the ribs. Or is too fast for them to feed or talk.
+
+Watch the chest, not the thermometer.
+
+
+A rash that does not fade when you press the side of a clear glass against it.
+
+Do this in good light. Check again in an hour if you are unsure.
+
+
+Hard to wake, or awake but not responding the way they usually do.
+
+You know their normal better than any doctor does. That knowledge is diagnostic. Trust it.
+
+
+A temperature of 38 or above for five days without a full day below it.
+
+Five days is the line. Not 38.6 versus 38.1 — that difference tells you almost nothing.
+
+
+None of these? What you are doing is probably enough.
+
+That sentence is the whole product. We built Bedside to give parents a line to check instead of a night to fear.</div>
+      </div>
+    </div>
+
+    <!-- P7 ARABIC -->
+    <div class="post">
+      <div class="post-bar"><span class="plat"><i></i>Arabic &middot; Carousel + caption</span><span class="why">Same calm register in Arabic</span></div>
+      <div class="post-in">
+        <h3>النسخة العربية</h3>
+        <div class="carousel">
+          <div class="card45 dark" style="direction:rtl;text-align:right"><span class="n">احفظي هذا</span><span class="t" style="font-family:var(--ar);font-size:14px">الحرارة ليست هي الخطر. هذه الست علامات هي الخطر.</span><span class="wm">Bedside</span></div>
+          <div class="card45 light" style="direction:rtl;text-align:right"><span class="n">٠١</span><div><span class="t" style="font-family:var(--ar);font-size:13px">أقل من ثلاث حفاضات مبللة خلال أربع وعشرين ساعة</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light" style="direction:rtl;text-align:right"><span class="n">٠٢</span><div><span class="t" style="font-family:var(--ar);font-size:13px">تنفّس يسحب الجلد تحت الأضلاع أو بينها</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 light" style="direction:rtl;text-align:right"><span class="n">٠٣</span><div><span class="t" style="font-family:var(--ar);font-size:13px">طفح جلدي لا يختفي عند الضغط عليه بكوب زجاجي شفاف</span></div><span class="wm">Bedside</span></div>
+          <div class="card45 dark" style="direction:rtl;text-align:right"><span class="n">إذا لم تظهر أي منها</span><span class="t" style="font-family:var(--ar);font-size:14px">فما تفعلينه الآن يكفي على الأرجح.</span><span class="wm">Bedside</span></div>
+        </div>
+        <div>
+          <span class="lbl">Caption &middot; Arabic</span>
+          <div class="copy ar">معظم الأهل يسهرون الليل بجانب طفل محموم دون أن يعرفوا ما الذي يجب أن ينتبهوا له.
+
+هذه هي العلامات. ليست إحساساً ولا تخميناً، بل أمور يمكنك التحقق منها فعلياً. إذا ظهرت إحداها، تصرّفي. وإذا لم تظهر أي منها، فما تفعلينه الآن يكفي على الأرجح.
+
+احفظي المنشور الآن لتجدينه عند الثالثة فجراً.
+
+هذه إرشادات عامة للأطفال وليست نصيحة طبية تخص طفلك. إذا كنت قلقة، اعرضيه على طبيب. وإذا شعرت أن الحالة خطيرة، اتصلي بالإسعاف فوراً.</div>
+        </div>
+        <div>
+          <span class="lbl">Anchor line &middot; Arabic</span>
+          <div class="copy ar">قولي لنا ما الذي يحدث. ونحن نقول لك ماذا يعني.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 3. BEFORE YOU POST -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">03</span><h2>Before any of this goes live</h2></div>
+    <div class="flag">
+      <b class="h">Two things to clear first. Neither is optional.</b>
+      <ol>
+        <li><strong>A paediatrician signs off every clinical line.</strong> The thresholds above are written from standard paediatric guidance and they are the right shape, but posting clinical content to thousands of parents is a different risk from putting it in a report a parent asked for. Get them reviewed and keep a dated record of who approved what.</li>
+        <li><strong>Health marketing is regulated in the UAE.</strong> DHA and DoH have rules on how health services advertise, and a licensed provider's promotional content can require approval. Check where guidance content sits before the first post, not after it.</li>
+      </ol>
+      <p style="font-size:.95rem;color:var(--ink-2)">Keep the safety line on every clinical post: general guidance, not advice about your child, and call an ambulance if you think it is serious. It is not legal cover, it is the voice being consistent.</p>
+    </div>
+  </section>
+
+  <!-- 4. HOW TO KEEP IT ON VOICE -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">04</span><h2>If someone else writes the next batch</h2></div>
+    <div class="body">
+      <p>Four tests. A post fails if any one of them fails.</p>
+    </div>
+    <div class="pillars" style="margin-top:.9rem">
+      <div class="pil q1"><span class="k">Test 1</span><b>Would it frighten a parent who is already frightened?</b><span>If yes, rewrite it. This is the one that kills most drafts.</span></div>
+      <div class="pil q2"><span class="k">Test 2</span><b>Is there a number or a specific in it?</b><span>"Watch for dehydration" is nothing. "Fewer than three wet nappies" is the product.</span></div>
+      <div class="pil q3"><span class="k">Test 3</span><b>Does it scold?</b><span>No "most parents get this wrong". Parents are doing their best at three in the morning.</span></div>
+      <div class="pil q4"><span class="k">Test 4</span><b>Read it aloud. Does it sound like a person?</b><span>No exclamation marks. No "here's the thing". No asking for comments.</span></div>
+    </div>
+  </section>
+
+  <div class="foot">Bedside Health Ltd &middot; Social kit, September 2026. Hashtags are a starting set and should be checked against what actually performs in the UAE before the first paid push.</div>
+</div>
