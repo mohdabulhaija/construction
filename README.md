@@ -41,3 +41,11 @@ The example child, parent, and every clinical detail are made up, and the page s
 `brief.html` is a one-page product brief for sharing with stakeholders: overview, the problem, target audience, main value, competitive edge, business model, and messaging. It carries the same identity as the site and has print styles, so it exports cleanly to PDF from the browser.
 
 Figures in it that are assumptions rather than research are listed explicitly at the end of the page.
+
+## UAE launch pricing
+
+`pricing-uae.html` benchmarks the launch price against global comparables and UAE consultation costs, and recommends AED 399 per household per year, with a founding price of AED 299.
+
+It also flags a structural problem with the original model: unlimited paediatrician calls cost more than the subscription at UAE clinician rates. The recommendation meters the calls (one included, AED 99 after) and keeps the written assessments unlimited.
+
+The brief has been updated to match.

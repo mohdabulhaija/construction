@@ -1,0 +1,321 @@
+<title>Bedside UAE Pricing</title>
+<style>
+:root{
+  --ground:#F0F1F9; --sheet:#FFFFFF; --sheet-2:#F7F7FC;
+  --ink:#191B38; --ink-2:#4A4D70; --muted:#737699;
+  --line:#DEDFEE; --line-2:#C4C6DE;
+  --brand:#6D28D9; --brand-2:#8B5CF6; --on-brand:#FFFFFF;
+  --brand-soft:#EEE9FD; --brand-line:#C9B8F5;
+  --hero-1:#211A4E; --hero-2:#3E2A80; --hero-ink:#FFFFFF; --hero-ink-2:#C7C0E6;
+  --hero-line:rgba(255,255,255,.16); --hero-chip:rgba(255,255,255,.10);
+  --s1:#D97706; --s2:#0F8A78; --s3:#2563EB; --s4:#D6336C;
+  --good:#0F7A5F; --good-soft:#E3F2EC;
+  --warn:#B45309; --warn-soft:#FBEEDD; --warn-line:#E7C69C;
+  --bar:#8A8DAC;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Figtree","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --r:14px;
+  --shadow:0 1px 2px rgba(25,27,56,.05), 0 8px 24px -12px rgba(25,27,56,.16);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+    --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+    --line:#2B2E45; --line-2:#3D4160;
+    --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+    --brand-soft:#241E3F; --brand-line:#4C3E85;
+    --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+    --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+    --good:#4FBF9A; --good-soft:#12291F;
+    --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+    --bar:#7B7FA0;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101120; --sheet:#191B2C; --sheet-2:#1F2135;
+  --ink:#E9EAF5; --ink-2:#B3B6D0; --muted:#8A8DAC;
+  --line:#2B2E45; --line-2:#3D4160;
+  --brand:#A78BFA; --brand-2:#C4B5FD; --on-brand:#1A1236;
+  --brand-soft:#241E3F; --brand-line:#4C3E85;
+  --hero-1:#171238; --hero-2:#2E1F60; --hero-ink-2:#BDB6DE;
+  --s1:#C4842B; --s2:#1B9E86; --s3:#5E8FE0; --s4:#D45F87;
+  --good:#4FBF9A; --good-soft:#12291F;
+  --warn:#E0A458; --warn-soft:#2C2212; --warn-line:#5A4520;
+  --bar:#7B7FA0;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-size:16.5px;line-height:1.58;-webkit-font-smoothing:antialiased}
+p{margin:0}
+h1,h2{margin:0;font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 40;letter-spacing:-.012em}
+:focus-visible{outline:2.5px solid var(--brand);outline-offset:2px}
+.page{width:min(100% - 2.5rem, 56rem);margin:0 auto;padding-bottom:3.5rem}
+
+.masthead{background:linear-gradient(158deg,var(--hero-1),var(--hero-2) 70%,#4B2F94);
+  color:var(--hero-ink);border-radius:0 0 26px 26px;margin-bottom:2.25rem}
+.masthead-in{width:min(100% - 2.5rem, 56rem);margin:0 auto;padding:1.5rem 0 2rem;display:grid;gap:1rem}
+.mh-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.78rem;color:var(--hero-ink-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.masthead h1{font-size:clamp(1.55rem,1.2rem + 1.5vw,2.1rem);color:var(--hero-ink);max-width:26ch;
+  font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 60}
+
+/* headline recommendation */
+.rec{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;
+  background:var(--hero-chip);border:1px solid var(--hero-line);border-radius:var(--r);padding:1.2rem 1.35rem}
+.rec .amt{font-family:var(--display);font-size:3rem;font-weight:600;line-height:1;letter-spacing:-.03em;
+  color:#fff;font-variation-settings:"SOFT" 50,"WONK" 1,"opsz" 110;white-space:nowrap}
+.rec .amt small{font-family:var(--sans);font-size:.85rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--hero-ink-2);display:block;margin-top:.35rem}
+.rec p{color:var(--hero-ink);font-size:1rem;max-width:46ch}
+.rec b{color:#fff;font-weight:700}
+@media (max-width:600px){.rec{grid-template-columns:1fr;gap:.9rem}}
+
+.sec{margin-bottom:2.1rem}
+.sec-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.9rem;
+  padding-bottom:.55rem;border-bottom:2px solid var(--line)}
+.sec-n{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:var(--brand);flex:none;
+  font-variant-numeric:tabular-nums}
+.sec-head h2{font-size:1.28rem}
+.body{display:grid;gap:.85rem;max-width:66ch}
+.body p{color:var(--ink-2)}
+.body p.lead{color:var(--ink);font-size:1.04rem}
+strong{color:var(--ink);font-weight:700}
+
+.chart-card{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);
+  padding:1.15rem 1.2rem;display:grid;gap:.7rem}
+.chart-card .ct{display:grid;gap:.15rem}
+.chart-card .ct b{font-size:.97rem;color:var(--ink)}
+.chart-card .ct span{font-size:.85rem;color:var(--muted)}
+.chart-scroll{overflow-x:auto}
+.chart-scroll svg{display:block;min-width:520px;width:100%;height:auto}
+.axtext{fill:var(--muted);font-family:var(--sans);font-size:11.5px;font-weight:600}
+.catlbl{fill:var(--ink-2);font-family:var(--sans);font-size:12.5px;font-weight:600}
+.catlbl.ours{fill:var(--ink);font-weight:800}
+.vallbl{fill:var(--ink-2);font-family:var(--sans);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.vallbl.ours{fill:var(--brand);font-weight:800}
+.gridline{stroke:var(--line);stroke-width:1}
+.axis{stroke:var(--line-2);stroke-width:1.5}
+.bar{fill:var(--bar)}
+.bar.ours{fill:var(--brand)}
+.keyrow{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.85rem;color:var(--muted);font-weight:600}
+.keyrow span{display:inline-flex;align-items:center;gap:.4rem}
+.swatch{width:12px;height:12px;border-radius:3px;flex:none}
+
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--sheet)}
+table{border-collapse:collapse;width:100%;min-width:32rem;font-size:.94rem}
+th,td{text-align:left;padding:.75rem .95rem;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:var(--sheet-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.n{font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.w{font-weight:700;color:var(--ink);white-space:nowrap}
+
+.reasons{list-style:none;margin:0;padding:0;display:grid;gap:.7rem;counter-reset:r}
+.reasons li{display:grid;grid-template-columns:1.7rem 1fr;gap:.75rem;align-items:start;color:var(--ink-2)}
+.reasons li::before{counter-increment:r;content:counter(r);
+  width:1.5rem;height:1.5rem;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:grid;place-items:center;font-size:.78rem;font-weight:800;margin-top:.15rem}
+
+.flag{background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:var(--r);
+  padding:1.15rem 1.3rem;display:grid;gap:.7rem;max-width:none}
+.flag b.h{color:var(--warn);font-size:1rem}
+.flag p{color:var(--ink-2);font-size:.96rem}
+.flag .math{background:var(--sheet);border:1px solid var(--warn-line);border-radius:10px;
+  padding:.8rem 1rem;font-size:.93rem;color:var(--ink);display:grid;gap:.3rem}
+.flag .math div{display:grid;grid-template-columns:1fr auto;gap:1rem;font-variant-numeric:tabular-nums}
+.flag .math div.tot{border-top:1px solid var(--line);padding-top:.35rem;margin-top:.15rem;font-weight:800}
+.flag .math span:last-child{font-weight:700}
+
+.fix{background:var(--good-soft);border-left:3px solid var(--good);border-radius:0 10px 10px 0;
+  padding:.9rem 1.1rem;color:var(--ink);font-size:.97rem}
+
+.test{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.test li{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:baseline;color:var(--ink-2)}
+.test li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-line);
+  transform:translateY(-2px)}
+
+.src{font-size:.86rem;color:var(--muted);display:grid;gap:.35rem}
+.src a{color:var(--muted)}
+.foot{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+
+@media print{
+  body{background:#fff;font-size:11pt}
+  .masthead{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sec,.chart-card,.flag,.tbl-scroll{break-inside:avoid}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="mh-top"><span>Bedside &middot; UAE launch pricing</span><span>September 2026</span></div>
+    <h1>What to charge in the UAE, and why.</h1>
+    <div class="rec">
+      <div class="amt">AED&nbsp;399<small>per household, per year</small></div>
+      <p>Inclusive of VAT. Unlimited written assessments, every child under sixteen at the address. <b>Launch the first cohort at AED 299, locked for life,</b> so renewal never feels like a price rise.</p>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- 1 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">01</span><h2>Where AED 399 sits globally</h2></div>
+    <div class="chart-card">
+      <div class="ct">
+        <b>Annual cost of comparable consumer health subscriptions</b>
+        <span>Converted to AED at the pegged rate of 3.6725 to the US dollar. Subscriptions only; per-visit services are in the next table.</span>
+      </div>
+      <div class="chart-scroll">
+        <svg viewBox="0 0 640 352" role="img" aria-label="Horizontal bar chart of annual subscription costs in AED. Altibbi 220, UAE basic insurance package 320, One Medical with Prime 364, Bedside proposed 399, the original 96 pound price 451, One Medical standalone 731, Blueberry annual 793, Blueberry monthly billing 1278.">
+          <line class="gridline" x1="315.7" y1="12" x2="315.7" y2="316"/>
+          <line class="gridline" x1="421.4" y1="12" x2="421.4" y2="316"/>
+          <line class="gridline" x1="527.1" y1="12" x2="527.1" y2="316"/>
+          <line class="axis" x1="210" y1="12" x2="210" y2="316"/>
+
+          <text class="catlbl" x="200" y="35" text-anchor="end">Altibbi (MENA)</text>
+          <rect class="bar" x="210" y="22" width="58.1" height="18" rx="4"/>
+          <text class="vallbl" x="276" y="35">220</text>
+
+          <text class="catlbl" x="200" y="73" text-anchor="end">UAE basic insurance</text>
+          <rect class="bar" x="210" y="60" width="84.6" height="18" rx="4"/>
+          <text class="vallbl" x="303" y="73">320</text>
+
+          <text class="catlbl" x="200" y="111" text-anchor="end">One Medical + Prime (US)</text>
+          <rect class="bar" x="210" y="98" width="96.2" height="18" rx="4"/>
+          <text class="vallbl" x="314" y="111">364</text>
+
+          <text class="catlbl ours" x="200" y="149" text-anchor="end">Bedside, proposed</text>
+          <rect class="bar ours" x="210" y="136" width="105.5" height="18" rx="4"/>
+          <text class="vallbl ours" x="324" y="149">399</text>
+
+          <text class="catlbl" x="200" y="187" text-anchor="end">Original &pound;96 price</text>
+          <rect class="bar" x="210" y="174" width="119.2" height="18" rx="4"/>
+          <text class="vallbl" x="337" y="187">451</text>
+
+          <text class="catlbl" x="200" y="225" text-anchor="end">One Medical alone (US)</text>
+          <rect class="bar" x="210" y="212" width="193.2" height="18" rx="4"/>
+          <text class="vallbl" x="411" y="225">731</text>
+
+          <text class="catlbl" x="200" y="263" text-anchor="end">Blueberry, annual (US)</text>
+          <rect class="bar" x="210" y="250" width="209.6" height="18" rx="4"/>
+          <text class="vallbl" x="428" y="263">793</text>
+
+          <text class="catlbl" x="200" y="301" text-anchor="end">Blueberry, monthly (US)</text>
+          <rect class="bar" x="210" y="288" width="337.8" height="18" rx="4"/>
+          <text class="vallbl" x="556" y="301">1,278</text>
+
+          <text class="axtext" x="210" y="334" text-anchor="middle">0</text>
+          <text class="axtext" x="315.7" y="334" text-anchor="middle">400</text>
+          <text class="axtext" x="421.4" y="334" text-anchor="middle">800</text>
+          <text class="axtext" x="527.1" y="334" text-anchor="middle">1,200</text>
+          <text class="axtext" x="580" y="348" text-anchor="end">AED per year</text>
+        </svg>
+      </div>
+      <div class="keyrow">
+        <span><span class="swatch" style="background:var(--brand)"></span> Bedside</span>
+        <span><span class="swatch" style="background:var(--bar)"></span> Benchmark</span>
+      </div>
+    </div>
+    <div class="body" style="margin-top:.9rem">
+      <p><strong>Blueberry Pediatrics is the closest structural match anywhere in the world:</strong> unlimited virtual paediatric care, every child in the household, no per-visit fee. It charges USD 216 a year, about AED 793. That is the ceiling, set by a brand with years of evidence behind it.</p>
+      <p>The floor is Altibbi at roughly AED 220 a year, but Altibbi is priced for the whole Arabic-speaking region including much lower-income markets. Matching it in the UAE would price Bedside as a commodity.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">02</span><h2>What a UAE parent pays today</h2></div>
+    <div class="body" style="margin-bottom:.9rem">
+      <p class="lead">This table matters more than the one above. It is the number in the parent's head when they decide whether to bother asking.</p>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>What they do now</th><th>Cost</th><th>What it means for us</th></tr></thead>
+        <tbody>
+          <tr><td class="w">Paediatrician, private clinic</td><td class="n">From AED 300</td><td>One visit costs three quarters of a full year of Bedside.</td></tr>
+          <tr><td class="w">Follow-up visit</td><td class="n">AED 200&ndash;350</td><td>The second opinion is nearly the price of the first.</td></tr>
+          <tr><td class="w">Teleconsultation, cash</td><td class="n">AED 149&ndash;450</td><td>Our included call sits inside this band. See section 04.</td></tr>
+          <tr><td class="w">Teleconsultation, insured</td><td class="n">AED 185 flat</td><td>Even insured, asking is not free.</td></tr>
+          <tr><td class="w">Outpatient co-pay, basic plan</td><td class="n">25%, up to AED 100</td><td><strong>The real competitor.</strong> Four co-paid visits a year and Bedside has paid for itself.</td></tr>
+          <tr><td class="w">Paediatric home visit</td><td class="n">AED 800&ndash;2,000</td><td>What a frightened parent pays at 11pm having waited too long.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">03</span><h2>Why 399</h2></div>
+    <ul class="reasons">
+      <li><strong>It is priced against one clinic visit, not against insurance.</strong> A parent compares AED 399 for the year to AED 300 for a single paediatric consultation. That comparison wins on its own, with no explanation needed.</li>
+      <li><strong>It clears the commodity band.</strong> At AED 220 we look like a cheap teleconsult app. At AED 399 we look like a considered product, while still being half of Blueberry.</li>
+      <li><strong>It breaks even at four questions a year.</strong> Four basic-plan co-pays is AED 400. Any parent of a child under five will ask more than four times. That is a sentence a salesperson can say.</li>
+      <li><strong>AED 399 is the natural shelf price.</strong> It sits under the 400 threshold, and reads as AED 33 a month, which is small enough in Dubai terms to be a non-decision.</li>
+    </ul>
+  </section>
+
+  <!-- 4 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">04</span><h2>The problem with the included call</h2></div>
+    <div class="flag">
+      <b class="h">Unlimited paediatrician calls do not survive contact with UAE clinician rates.</b>
+      <p>The brief currently promises fifteen minutes with a paediatrician, booked from any report, included in the fee. At UAE teleconsultation rates that single promise can consume the whole subscription.</p>
+      <div class="math">
+        <div><span>Annual fee, per household</span><span>AED 399</span></div>
+        <div><span>Cost of one 15-minute paediatrician call, at market rate</span><span>AED 150&ndash;250</span></div>
+        <div><span>Assumed calls per household per year</span><span>2</span></div>
+        <div class="tot"><span>Clinician cost alone, before any report cost</span><span>AED 300&ndash;500</span></div>
+      </div>
+      <p>Two calls a year and the product loses money before a single report is written. This is a structural issue, not a pricing one. Raising the price to cover it would push us past Blueberry, which we cannot justify at launch.</p>
+    </div>
+    <div class="fix" style="margin-top:.9rem">
+      <strong>The fix, which keeps the promise intact:</strong> unlimited written assessments, because those are cheap and they are the actual product. <strong>One included paediatrician call per year,</strong> then AED 99 for each additional call. That is still well under the AED 149 to 185 the parent would pay anywhere else, so the offer stays generous while the expensive resource is metered.
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">05</span><h2>The full recommendation</h2></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Line</th><th>Price</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td class="w">Annual, per household</td><td class="n">AED 399</td><td>The price we publish. VAT inclusive.</td></tr>
+          <tr><td class="w">Founding cohort</td><td class="n">AED 299</td><td>First 1,000 households, locked for life. Buys renewal evidence.</td></tr>
+          <tr><td class="w">Monthly</td><td class="n">AED 49</td><td>Exists to make the annual look like a saving of AED 189, and to lower the barrier for anyone who will not prepay a year.</td></tr>
+          <tr><td class="w">Extra paediatrician calls</td><td class="n">AED 99</td><td>After the one included in the fee.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="body" style="margin-top:.9rem">
+      <p><strong>Do not discount below AED 299.</strong> Below that the product reads as an app, not as care, and the anchor is very hard to raise later.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-n">06</span><h2>Before this is locked</h2></div>
+    <ul class="test">
+      <li>Run <strong>AED 299 / 399 / 499</strong> as a landing-page price test before committing. The band is defensible at all three; only real behaviour separates them.</li>
+      <li>Confirm the <strong>VAT position.</strong> Some licensed healthcare services are zero-rated in the UAE, but a written guidance subscription may not qualify. If 5% applies, AED 399 inclusive nets about AED 380.</li>
+      <li>Confirm <strong>DHA and DoH licensing</strong> for the paediatrician call. It is the part of the product that is regulated, and it drives the cost line in section 04.</li>
+      <li>Measure the <strong>call attach rate</strong> from the first cohort. It is the number that decides whether even one included call is affordable.</li>
+      <li>Price the <strong>Saudi market separately</strong> when you get there. It is the obvious second market and it does not carry UAE cost structure.</li>
+    </ul>
+  </section>
+
+  <div class="src">
+    <strong style="color:var(--ink)">Sources</strong>
+    <span><a href="https://www.blueberrypediatrics.com/pricing">Blueberry Pediatrics pricing</a> &middot; <a href="https://urgentcare.summerhealth.com/pricing">Summer Health pricing</a> &middot; <a href="https://health.amazon.com/prime">Amazon One Medical</a> &middot; <a href="https://uaestartupstory.com/altibbi-success-story/">Altibbi</a></span>
+    <span><a href="https://doctorsclinicdubai.ae/blog/pediatrician-cost-dubai">Paediatrician cost, Dubai</a> &middot; <a href="https://drplus.ae/doctor-on-call-dubai-cost/">Doctor on call, Dubai</a> &middot; <a href="https://hayah.com/knowledge-centre/articles/uae-health-insurance-law">UAE health insurance law and co-pays</a> &middot; <a href="https://apps.apple.com/us/app/id1219955500">Health at Hand</a></span>
+  </div>
+
+  <div class="foot">Prices for competitors were published at the time of research and change often. Verify before quoting any of them externally.</div>
+</div>
