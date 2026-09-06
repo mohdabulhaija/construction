@@ -49,3 +49,16 @@ Figures in it that are assumptions rather than research are listed explicitly at
 It also flags a structural problem with the original model: unlimited paediatrician calls cost more than the subscription at UAE clinician rates. The recommendation meters the calls (one included, AED 99 after) and keeps the written assessments unlimited.
 
 The brief has been updated to match.
+
+## Pitch deck
+
+`deck.html` is a 13-slide pitch deck at 1280x720 (16:9). `Bedside-Pitch-Deck.pdf` is the rendered PDF.
+
+To regenerate the PDF after editing the deck:
+
+```
+npm i playwright
+node tools-render-pdf.js "$PWD/deck.html" "$PWD/Bedside-Pitch-Deck.pdf"
+```
+
+The deck uses a fixed light palette rather than the site's light/dark tokens, because a PDF has one visual world. Slide size is set with `@page { size: 1280px 720px }` and rendered with `preferCSSPageSize`.

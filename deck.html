@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bedside — Pitch Deck</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Fixed light palette. A PDF has one visual world. */
+:root{
+  --sheet:#FFFFFF; --sheet-2:#F7F7FC; --ground:#F0F1F9;
+  --ink:#191B38; --ink-2:#4A4D70; --muted:#737699;
+  --line:#DEDFEE; --line-2:#C4C6DE;
+  --brand:#6D28D9; --brand-2:#8B5CF6; --brand-soft:#EEE9FD; --brand-line:#C9B8F5;
+  --hero-1:#211A4E; --hero-2:#3E2A80; --hero-ink:#FFFFFF; --hero-ink-2:#C7C0E6;
+  --hero-line:rgba(255,255,255,.18); --hero-chip:rgba(255,255,255,.10);
+  --s1:#D97706; --s2:#0F8A78; --s3:#2563EB; --s4:#D6336C;
+  --s1-soft:#FDF1E1; --s2-soft:#E2F3F0; --s3-soft:#E7EDFD; --s4-soft:#FCE9F0;
+  --good:#0F7A5F; --good-soft:#E3F2EC;
+  --warn:#B45309; --warn-soft:#FBEEDD; --warn-line:#E7C69C;
+  --age-1:#EDE9FD; --age-2:#DCD2FA; --age-3:#C6B5F6; --age-4:#AC94F2; --age-ink:#2B1A63;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Figtree","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+@page{ size:1280px 720px; margin:0 }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#5b5f7d}
+body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;line-height:1.1;letter-spacing:-.015em;
+  font-variation-settings:"SOFT" 45,"WONK" 1,"opsz" 60;text-wrap:balance}
+
+.slide{
+  width:1280px;height:720px;padding:60px 76px;position:relative;overflow:hidden;
+  background:var(--sheet);display:grid;align-content:start;
+  break-after:page;page-break-after:always;margin:0 auto 18px;
+}
+.slide:last-child{break-after:auto;page-break-after:auto;margin-bottom:0}
+.slide.dark{background:linear-gradient(155deg,var(--hero-1) 0%,var(--hero-2) 62%,#4B2F94 100%);color:var(--hero-ink)}
+.slide.tint{background:var(--ground)}
+
+.num{position:absolute;right:44px;bottom:34px;font-size:13px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.dark .num{color:rgba(255,255,255,.42)}
+
+.kicker{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:16px}
+.dark .kicker{color:var(--brand-2)}
+h2.st{font-size:46px;margin-bottom:10px}
+.sub{font-size:20px;color:var(--ink-2);max-width:76ch;line-height:1.5}
+.dark .sub{color:var(--hero-ink-2)}
+.rule{height:2px;background:var(--line);margin:22px 0 30px}
+
+/* lockup */
+.lockup{display:flex;align-items:center;gap:14px}
+.mark{width:52px;height:52px;border-radius:15px;background:var(--brand-2);display:grid;place-items:center;flex:none}
+.mark svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round}
+.lockup b{font-family:var(--display);font-size:30px;font-weight:600;letter-spacing:-.02em;display:block;line-height:1.1;
+  font-variation-settings:"SOFT" 45,"WONK" 1,"opsz" 30}
+.lockup span{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--hero-ink-2)}
+
+/* S1 title */
+.s-title{align-content:space-between}
+.s-title h1{font-size:66px;line-height:1.08;max-width:19ch;color:#fff;
+  font-variation-settings:"SOFT" 55,"WONK" 1,"opsz" 120}
+.s-title .meta{display:flex;gap:34px;font-size:16px;color:var(--hero-ink-2);font-weight:600;
+  border-top:1px solid var(--hero-line);padding-top:22px}
+
+/* generic cards */
+.cards{display:grid;gap:18px}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:24px;
+  display:grid;gap:8px;align-content:start;border-top:4px solid var(--cc,var(--brand))}
+.tint .card{background:var(--sheet)}
+.card .k{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--cc,var(--brand))}
+.card b{font-size:22px;font-weight:700;line-height:1.2;font-family:var(--display);font-weight:600}
+.card span{font-size:16px;color:var(--ink-2);line-height:1.5}
+.card .big{font-size:26px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;font-family:var(--sans)}
+.p1{--cc:var(--s1)}.p2{--cc:var(--s2)}.p3{--cc:var(--s3)}.p4{--cc:var(--s4)}
+
+/* figure holder */
+.fig{display:grid;place-items:center}
+.fig svg{display:block;height:auto}
+figcaption{font-size:16px;color:var(--muted);line-height:1.5;max-width:92ch;margin-top:14px}
+figcaption b{color:var(--ink)}
+figure{margin:0;display:grid;justify-items:center}
+
+/* gap diagram */
+.dg-box{fill:var(--brand-soft);stroke:var(--brand-line);stroke-width:1.5;stroke-dasharray:6 4}
+.dg-boxlbl{fill:var(--brand);font-family:var(--sans);font-size:13px;font-weight:800}
+.dg-axis{stroke:var(--line-2);stroke-width:1.5}
+.dg-ax{fill:var(--muted);font-family:var(--sans);font-size:11.5px;font-weight:700}
+.dg-open{fill:var(--sheet);stroke:var(--muted);stroke-width:2.5}
+.dg-free{fill:var(--muted)}
+.dg-ours{fill:var(--brand);stroke:var(--sheet);stroke-width:2.5}
+.dg-lbl{fill:var(--ink);font-family:var(--sans);font-size:13px;font-weight:700}
+.dg-lbl.ours{fill:var(--brand);font-weight:800}
+.dg-sub{fill:var(--muted);font-family:var(--sans);font-size:11.5px;font-weight:600}
+
+/* bar chart */
+.axtext{fill:var(--muted);font-family:var(--sans);font-size:11.5px;font-weight:600}
+.catlbl{fill:var(--ink-2);font-family:var(--sans);font-size:12.5px;font-weight:600}
+.catlbl.ours{fill:var(--ink);font-weight:800}
+.vallbl{fill:var(--ink-2);font-family:var(--sans);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.vallbl.ours{fill:var(--brand);font-weight:800}
+.gridline{stroke:var(--line);stroke-width:1}
+.axis{stroke:var(--line-2);stroke-width:1.5}
+.bar{fill:#8A8DAC}
+.bar.ours{fill:var(--brand)}
+
+/* product mock */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+.device{background:var(--sheet);border:1px solid var(--line);border-radius:24px;padding:8px;
+  box-shadow:0 26px 60px -28px rgba(20,12,60,.4);width:330px;justify-self:center}
+.device-in{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.dev-top{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);
+  font-size:11px;color:var(--muted);font-weight:700}
+.dev-top b{color:var(--ink);font-size:12px}
+.dev-body{padding:16px}
+.dev-kid{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--age-3);
+  color:var(--age-ink);font-weight:800;font-size:13px;flex:none}
+.dev-kid b{font-size:13px;display:block;line-height:1.2}
+.dev-kid span{font-size:11px;color:var(--muted);font-weight:600}
+.dev-title{font-family:var(--display);font-size:16px;font-weight:600;line-height:1.25;margin-bottom:13px}
+.dev-row{display:grid;grid-template-columns:auto 1fr;gap:9px;align-items:center;background:var(--sheet-2);
+  border-radius:9px;padding:8px 10px;font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:7px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dev-cta{background:var(--brand);color:#fff;border-radius:999px;padding:10px;text-align:center;
+  font-size:11.5px;font-weight:700;margin-top:11px}
+
+/* lists */
+.pts{display:grid;gap:16px;margin:0;padding:0;list-style:none}
+.pts li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;font-size:19px;color:var(--ink-2);line-height:1.5}
+.pts li::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--brand-line);margin-top:11px}
+.dark .pts li{color:var(--hero-ink-2)}
+.dark .pts li::before{background:var(--brand-2)}
+.pts b{color:var(--ink);font-weight:700}
+.dark .pts b{color:#fff}
+
+/* table */
+table{border-collapse:collapse;width:100%;font-size:17px}
+th,td{text-align:left;padding:13px 16px;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  background:var(--sheet-2)}
+tbody tr:last-child td{border-bottom:0}
+td.w{font-weight:700;color:var(--ink);white-space:nowrap}
+td.g{color:var(--ink-2)}
+td.u{background:var(--brand-soft);color:var(--ink);font-weight:600}
+.tblbox{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--sheet)}
+
+/* price */
+.pricegrid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
+.bigprice{font-family:var(--display);font-size:104px;line-height:1;font-weight:600;letter-spacing:-.035em;color:#fff;
+  font-variation-settings:"SOFT" 55,"WONK" 1,"opsz" 140;white-space:nowrap}
+.bigprice small{display:block;font-family:var(--sans);font-size:17px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--hero-ink-2);margin-top:14px}
+.terms{display:grid;gap:12px}
+.terms div{display:grid;grid-template-columns:230px 1fr;gap:22px;font-size:18px;
+  border-bottom:1px solid var(--hero-line);padding-bottom:12px}
+.terms dt{color:var(--hero-ink-2);font-weight:600;margin:0}
+.terms dd{margin:0;color:#fff;font-weight:500}
+
+/* flag box */
+.flagbox{background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:16px;padding:26px 30px;display:grid;gap:14px}
+.flagbox .h{color:var(--warn);font-size:21px;font-weight:800}
+.math{background:#fff;border:1px solid var(--warn-line);border-radius:12px;padding:16px 20px;display:grid;gap:7px;font-size:17px}
+.math div{display:grid;grid-template-columns:1fr auto;gap:20px;font-variant-numeric:tabular-nums}
+.math div.tot{border-top:1px solid var(--line);padding-top:9px;margin-top:3px;font-weight:800}
+.math span:last-child{font-weight:700}
+.fixbox{background:var(--good-soft);border-left:4px solid var(--good);border-radius:0 12px 12px 0;
+  padding:18px 22px;font-size:18px;line-height:1.5}
+.fixbox b{font-weight:800}
+
+/* anchor slide */
+.anchorq{font-family:var(--display);font-size:52px;font-weight:600;line-height:1.15;color:#fff;max-width:20ch;
+  font-variation-settings:"SOFT" 55,"WONK" 1,"opsz" 100}
+.voice{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.voice span{border:1px solid var(--hero-line);border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;
+  color:var(--hero-ink-2)}
+
+/* ages */
+.age{border-radius:16px;padding:22px;display:grid;gap:8px;align-content:start;background:var(--sheet);
+  border:1px solid var(--line)}
+.agekey{display:inline-flex;align-items:center;gap:9px;font-size:17px;font-weight:800}
+.sw{width:18px;height:18px;border-radius:6px;flex:none}
+.age b{font-size:17px;font-weight:700;color:var(--ink)}
+.age span{font-size:15.5px;color:var(--ink-2);line-height:1.45}
+
+/* close */
+.s-close{align-content:center;justify-items:center;text-align:center}
+.s-close .anchorq{max-width:24ch;text-align:center;font-size:56px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M5 20V7.5A3.5 3.5 0 0 1 8.5 4h7A3.5 3.5 0 0 1 19 7.5V20"/><path d="M5 9h3M5 13h3M5 17h3M19 9h-3M19 13h-3M19 17h-3"/></symbol>
+</defs></svg>
+
+<!-- ============ 1. TITLE ============ -->
+<section class="slide dark s-title">
+  <div class="lockup">
+    <span class="mark"><svg><use href="#i-mark"/></svg></span>
+    <span><b>Bedside</b><span>Children's health</span></span>
+  </div>
+  <h1>Tell us what’s happening. We’ll tell you what it means.</h1>
+  <div class="meta">
+    <span>Paediatric health guidance for parents</span>
+    <span>UAE launch</span>
+    <span>September 2026</span>
+  </div>
+</section>
+
+<!-- ============ 2. PROBLEM ============ -->
+<section class="slide">
+  <div class="kicker">The problem</div>
+  <h2 class="st">It is eleven at night. The child has a fever.</h2>
+  <p class="sub">The parent has three options. None of them work.</p>
+  <div class="rule"></div>
+  <div class="cards c3">
+    <div class="card p1">
+      <span class="k">Option 1</span><b>Search the internet</b>
+      <span class="big">Free</span>
+      <span>Worst-case results, written for nobody in particular. It raises the anxiety without settling anything.</span>
+    </div>
+    <div class="card p2">
+      <span class="k">Option 2</span><b>Wait for a doctor</b>
+      <span class="big">AED 300, days later</span>
+      <span>Hours on a helpline, or days for an appointment. The moment the parent needed help has already passed.</span>
+    </div>
+    <div class="card p4">
+      <span class="k">Option 3</span><b>Go to the emergency room</b>
+      <span class="big">AED 800&ndash;2,000</span>
+      <span>Hours of waiting, often for something that turns out not to be an emergency.</span>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:30px;font-size:21px;color:var(--ink)">The gap is not a lack of information. <b>Nothing turns what the parent is looking at into a decision they can act on tonight.</b></p>
+  <span class="num">02</span>
+</section>
+
+<!-- ============ 3. THE GAP ============ -->
+<section class="slide tint">
+  <div class="kicker">The gap</div>
+  <h2 class="st">The fast-and-complete corner is empty.</h2>
+  <div class="fig" style="margin-top:8px">
+    <figure>
+      <svg width="752" viewBox="0 0 660 400" role="img" aria-label="Positioning chart: time to an answer against how complete the answer is. The fast and complete corner is empty except for Bedside.">
+        <rect class="dg-box" x="90" y="40" width="215" height="92" rx="8"/>
+        <text class="dg-boxlbl" x="296" y="62" text-anchor="end">The gap</text>
+        <line class="dg-axis" x1="90" y1="40" x2="90" y2="340"/>
+        <line class="dg-axis" x1="90" y1="340" x2="620" y2="340"/>
+        <text class="dg-ax" x="84" y="46" text-anchor="end">A decision</text>
+        <text class="dg-ax" x="84" y="336" text-anchor="end">Just a hint</text>
+        <text class="dg-ax" x="94" y="360">Minutes</text>
+        <text class="dg-ax" x="618" y="360" text-anchor="end">Days</text>
+        <circle class="dg-ours" cx="152" cy="100" r="10"/>
+        <text class="dg-lbl ours" x="169" y="96">Bedside</text>
+        <text class="dg-sub" x="169" y="112">Included, ask any time</text>
+        <circle class="dg-open" cx="225" cy="168" r="7"/>
+        <text class="dg-lbl" x="239" y="164">Teleconsultation</text>
+        <text class="dg-sub" x="239" y="180">AED 149&ndash;185 each time</text>
+        <circle class="dg-open" cx="345" cy="88" r="7"/>
+        <text class="dg-lbl" x="359" y="84">Emergency room</text>
+        <text class="dg-sub" x="359" y="100">AED 800&ndash;2,000, hours</text>
+        <circle class="dg-open" cx="505" cy="112" r="7"/>
+        <text class="dg-lbl" x="519" y="108">Clinic visit</text>
+        <text class="dg-sub" x="519" y="124">AED 300, days later</text>
+        <circle class="dg-free" cx="135" cy="290" r="7"/>
+        <text class="dg-lbl" x="149" y="286">Search and forums</text>
+        <text class="dg-sub" x="149" y="302">Free, but not an answer</text>
+        <circle class="dg-free" cx="96" cy="378" r="6"/>
+        <text class="dg-sub" x="108" y="382">No cost to ask again</text>
+        <circle class="dg-open" cx="270" cy="378" r="6"/>
+        <text class="dg-sub" x="282" y="382">Costs money every time</text>
+      </svg>
+      <figcaption style="text-align:center"><b>Everything that answers a parent properly makes them wait, pay, or both.</b> A teleconsultation comes closest, but it is metered, and a phone call leaves nothing written down to check against at three in the morning.</figcaption>
+    </figure>
+  </div>
+  <span class="num">03</span>
+</section>
+
+<!-- ============ 4. THE PRODUCT ============ -->
+<section class="slide">
+  <div class="kicker">What it is</div>
+  <h2 class="st">A parent describes what they see. A report comes back.</h2>
+  <p class="sub">A short form: which child, what you have noticed, in your own words, how long it has been going on. Minutes later, the same four parts, every time.</p>
+  <div class="rule"></div>
+  <div class="cards c4">
+    <div class="card p1"><span class="k">Part 1</span><b>What you told us</b><span>Their own words, read back, so a misunderstanding is visible at once.</span></div>
+    <div class="card p2"><span class="k">Part 2</span><b>What it likely means</b><span>Plain language, written for that child's age.</span></div>
+    <div class="card p3"><span class="k">Part 3</span><b>What to do now</b><span>Specific actions for tonight, each with the reason.</span></div>
+    <div class="card p4"><span class="k">Part 4</span><b>When to worry</b><span>Numbered thresholds, not vague symptoms.</span></div>
+  </div>
+  <p class="sub" style="margin-top:28px;font-size:19px">Every report ends with one next step, not an upsell: book fifteen minutes with a paediatrician.</p>
+  <span class="num">04</span>
+</section>
+
+<!-- ============ 5. THE PRODUCT, SEEN ============ -->
+<section class="slide tint">
+  <div class="split" style="margin-top:8px">
+    <div>
+      <div class="kicker">The report</div>
+      <h2 class="st" style="font-size:40px">Four parts, in the same order, every time.</h2>
+      <p class="sub" style="margin:14px 0 26px;font-size:18px">A parent learns where to look. When they are tired at eleven at night, that matters more than anything clever we could do.</p>
+      <ul class="pts" style="gap:13px">
+        <li><span><b>In your words.</b> No medical vocabulary required.</span></li>
+        <li><span><b>In plain language.</b> No jargon unless it is explained in the same sentence.</span></li>
+        <li><span><b>With a clear line.</b> Thresholds you can check, so you know when to act and when not to.</span></li>
+      </ul>
+    </div>
+    <div class="device">
+      <div class="device-in">
+        <div class="dev-top"><b>Your report</b><span>21:38</span></div>
+        <div class="dev-body">
+          <div class="dev-kid"><span class="av">A</span><span><b>Amara</b><span>2 years 4 months</span></span></div>
+          <p class="dev-title">A fever and a night-time cough, since yesterday</p>
+          <div class="dev-row"><span class="dot" style="background:var(--s1)"></span>What you told us</div>
+          <div class="dev-row"><span class="dot" style="background:var(--s2)"></span>What it likely means</div>
+          <div class="dev-row"><span class="dot" style="background:var(--s3)"></span>What to do now</div>
+          <div class="dev-row"><span class="dot" style="background:var(--s4)"></span>When to worry</div>
+          <div class="dev-cta">Book 15 minutes with a paediatrician</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="num">05</span>
+</section>
+
+<!-- ============ 6. AUDIENCE ============ -->
+<section class="slide">
+  <div class="kicker">Who it is for</div>
+  <h2 class="st">Parents of children, newborn to fifteen.</h2>
+  <p class="sub">What is ordinary at six months is not ordinary at ten years. Every report is written for the age of the child it is about.</p>
+  <div class="rule"></div>
+  <div class="cards c4">
+    <div class="age"><span class="agekey"><span class="sw" style="background:var(--age-1);border:1px solid var(--line-2)"></span>Under 1</span><b>Babies</b><span>Feeding, weight, crying, breathing, temperature. Tighter thresholds, and we say so.</span></div>
+    <div class="age"><span class="agekey"><span class="sw" style="background:var(--age-2)"></span>1 to 4</span><b>Toddlers</b><span>Fevers, coughs, rashes, tummy upsets. The core market: highest frequency, lowest confidence.</span></div>
+    <div class="age"><span class="agekey"><span class="sw" style="background:var(--age-3)"></span>5 to 11</span><b>School age</b><span>Ears, throats, headaches, sleep, days off school, falls.</span></div>
+    <div class="age"><span class="agekey"><span class="sw" style="background:var(--age-4)"></span>12 to 15</span><b>Teenagers</b><span>Growth, mood, sleep, headaches, sports injuries.</span></div>
+  </div>
+  <div class="cards c3" style="margin-top:26px">
+    <div class="card p3" style="border-top-color:var(--brand)"><span class="k" style="color:var(--brand)">Who buys</span><span style="font-size:17px">Usually the most anxious parent in the household. One decision-maker, one payment, the whole family covered.</span></div>
+    <div class="card p3" style="border-top-color:var(--brand)"><span class="k" style="color:var(--brand)">Who uses</span><span style="font-size:17px">The other parent, grandparents, and anyone else looking after the children. Access is by household.</span></div>
+    <div class="card p3" style="border-top-color:var(--brand)"><span class="k" style="color:var(--brand)">Expansion</span><span style="font-size:17px">Older children are a retention play, not acquisition. The subscription is already paid.</span></div>
+  </div>
+  <span class="num">06</span>
+</section>
+
+<!-- ============ 7. COMPETITIVE EDGE ============ -->
+<section class="slide">
+  <div class="kicker">Competitive edge</div>
+  <h2 class="st">Everyone else gives information. We give a decision.</h2>
+  <div class="rule" style="margin-bottom:22px"></div>
+  <div class="tblbox">
+    <table>
+      <thead><tr><th style="width:220px">The alternative</th><th>What it leaves the parent with</th><th style="width:330px">What Bedside does instead</th></tr></thead>
+      <tbody>
+        <tr><td class="w">Search and forums</td><td class="g">Worst-case answers with no way to judge relevance to their own child.</td><td class="u">One report, for that child's age and what the parent described.</td></tr>
+        <tr><td class="w">Symptom checkers</td><td class="g">A list of possible conditions, ending in a generic "see a doctor".</td><td class="u">A decision and a threshold, not a probability list.</td></tr>
+        <tr><td class="w">Per-visit telehealth</td><td class="g">A fee every time, so parents ration it and wait until they are worried enough.</td><td class="u">Flat annual fee, so they ask at the first worry instead of the fifth.</td></tr>
+        <tr><td class="w">Emergency room</td><td class="g">A complete answer, after hours of waiting and AED 800 to 2,000.</td><td class="u">Minutes, in writing, and the parent keeps the report.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sub" style="margin-top:24px;font-size:18px"><b style="color:var(--ink)">What is hard to copy:</b> the threshold library, age-banded and written to be checkable, plus a growing record of each child. Anyone can build a symptom form. The defensible asset is the accumulated judgement about where the lines sit.</p>
+  <span class="num">07</span>
+</section>
+
+<!-- ============ 8. BUSINESS MODEL ============ -->
+<section class="slide dark">
+  <div class="kicker">Business model</div>
+  <h2 class="st" style="color:#fff;margin-bottom:34px">One fee a year. Every child in the home.</h2>
+  <div class="pricegrid">
+    <div class="bigprice">AED&nbsp;399<small>per household, per year</small></div>
+    <dl class="terms">
+      <div><dt>Children covered</dt><dd>All children under 16 at the address, however many</dd></div>
+      <div><dt>Assessments</dt><dd>Unlimited</dd></div>
+      <div><dt>Included</dt><dd>One 15-minute paediatrician call a year, then AED 99 each</dd></div>
+      <div><dt>Founding cohort</dt><dd>AED 299, locked for life</dd></div>
+      <div style="border-bottom:0"><dt>Billing</dt><dd>Once a year, VAT inclusive</dd></div>
+    </dl>
+  </div>
+  <p class="sub" style="margin-top:32px;font-size:18px"><b style="color:#fff">Why flat, not per use.</b> A parent charged per report waits until they are frightened. A parent on a flat fee asks early, which is when guidance is cheapest to give and most useful to receive.</p>
+  <span class="num">08</span>
+</section>
+
+<!-- ============ 9. PRICE BENCHMARK ============ -->
+<section class="slide tint">
+  <div class="kicker">How we set that price</div>
+  <h2 class="st">Half of the closest comparable, clear of the commodity apps.</h2>
+  <div class="fig" style="margin-top:14px">
+    <figure>
+      <svg width="700" viewBox="0 0 640 352" role="img" aria-label="Bar chart of annual subscription costs in AED. Altibbi 220, UAE basic insurance 320, One Medical with Prime 364, Bedside 399, One Medical standalone 731, Blueberry annual 793, Blueberry monthly 1278.">
+        <line class="gridline" x1="315.7" y1="12" x2="315.7" y2="316"/>
+        <line class="gridline" x1="421.4" y1="12" x2="421.4" y2="316"/>
+        <line class="gridline" x1="527.1" y1="12" x2="527.1" y2="316"/>
+        <line class="axis" x1="210" y1="12" x2="210" y2="316"/>
+        <text class="catlbl" x="200" y="35" text-anchor="end">Altibbi (MENA)</text>
+        <rect class="bar" x="210" y="22" width="58.1" height="18" rx="4"/><text class="vallbl" x="276" y="35">220</text>
+        <text class="catlbl" x="200" y="73" text-anchor="end">UAE basic insurance</text>
+        <rect class="bar" x="210" y="60" width="84.6" height="18" rx="4"/><text class="vallbl" x="303" y="73">320</text>
+        <text class="catlbl" x="200" y="111" text-anchor="end">One Medical + Prime (US)</text>
+        <rect class="bar" x="210" y="98" width="96.2" height="18" rx="4"/><text class="vallbl" x="314" y="111">364</text>
+        <text class="catlbl ours" x="200" y="149" text-anchor="end">Bedside</text>
+        <rect class="bar ours" x="210" y="136" width="105.5" height="18" rx="4"/><text class="vallbl ours" x="324" y="149">399</text>
+        <text class="catlbl" x="200" y="225" text-anchor="end">One Medical alone (US)</text>
+        <rect class="bar" x="210" y="212" width="193.2" height="18" rx="4"/><text class="vallbl" x="411" y="225">731</text>
+        <text class="catlbl" x="200" y="263" text-anchor="end">Blueberry, annual (US)</text>
+        <rect class="bar" x="210" y="250" width="209.6" height="18" rx="4"/><text class="vallbl" x="428" y="263">793</text>
+        <text class="catlbl" x="200" y="301" text-anchor="end">Blueberry, monthly (US)</text>
+        <rect class="bar" x="210" y="288" width="337.8" height="18" rx="4"/><text class="vallbl" x="556" y="301">1,278</text>
+        <text class="axtext" x="210" y="334" text-anchor="middle">0</text>
+        <text class="axtext" x="315.7" y="334" text-anchor="middle">400</text>
+        <text class="axtext" x="421.4" y="334" text-anchor="middle">800</text>
+        <text class="axtext" x="527.1" y="334" text-anchor="middle">1,200</text>
+        <text class="axtext" x="580" y="348" text-anchor="end">AED per year</text>
+      </svg>
+      <figcaption style="text-align:center"><b>AED 399 is roughly one private paediatric consultation in Dubai, which starts at AED 300.</b> It breaks even against four insurance co-pays, and sits at half of Blueberry Pediatrics, the closest comparable anywhere in the world.</figcaption>
+    </figure>
+  </div>
+  <span class="num">09</span>
+</section>
+
+<!-- ============ 10. THE FIX WE MADE ============ -->
+<section class="slide">
+  <div class="kicker">What the pricing work changed</div>
+  <h2 class="st">Unlimited doctor calls do not survive UAE clinician rates.</h2>
+  <div class="rule" style="margin-bottom:22px"></div>
+  <div class="flagbox">
+    <span class="h">The original model promised unlimited paediatrician calls, included.</span>
+    <div class="math">
+      <div><span>Annual fee, per household</span><span>AED 399</span></div>
+      <div><span>Cost of one 15-minute paediatrician call, at market rate</span><span>AED 150&ndash;250</span></div>
+      <div><span>Assumed calls per household, per year</span><span>2</span></div>
+      <div class="tot"><span>Clinician cost alone, before any report is written</span><span>AED 300&ndash;500</span></div>
+    </div>
+  </div>
+  <div class="fixbox" style="margin-top:22px">
+    <b>The fix, which keeps the promise intact.</b> Unlimited written assessments, because those are cheap and they are the actual product. One included paediatrician call a year, then AED 99 each. Still well under the AED 149 to 185 a parent pays anywhere else, so the offer stays generous while the expensive resource is metered.
+  </div>
+  <span class="num">10</span>
+</section>
+
+<!-- ============ 11. MESSAGING ============ -->
+<section class="slide dark">
+  <div class="kicker">Messaging</div>
+  <h2 class="st" style="color:#fff;font-size:34px;margin-bottom:26px">Everything supports one line.</h2>
+  <p class="anchorq">“Tell us what’s happening. We’ll tell you what it means.”</p>
+  <p class="sub" style="margin-top:26px;font-size:19px">It states the exchange in the parent's own terms and promises exactly one thing.</p>
+  <div class="rule" style="background:var(--hero-line);margin:28px 0 24px"></div>
+  <p class="sub" style="font-size:19px"><b style="color:#fff">How we sound.</b> Calm, plain, declarative. Never urgent or alarmed, because an anxious parent does not need us to raise the temperature. Not commercial in tone, because trust is the product.</p>
+  <div class="voice">
+    <span>Calm</span><span>Plain</span><span>Declarative</span><span>Short sentences</span>
+    <span>No exclamation marks</span><span>Never alarmed</span><span>Never salesy</span>
+  </div>
+  <span class="num">11</span>
+</section>
+
+<!-- ============ 12. OPEN ============ -->
+<section class="slide">
+  <div class="kicker">Before this is a plan</div>
+  <h2 class="st">What we still have to prove.</h2>
+  <p class="sub">Everything above is reasoned from market data. None of it is yet evidence from our own customers.</p>
+  <div class="rule"></div>
+  <ul class="pts">
+    <li><span><b>Price.</b> AED 399 is benchmarked, not tested. Run AED 299, 399 and 499 as a live landing-page test before locking it.</span></li>
+    <li><span><b>Cost per report.</b> Depends on how much clinician review each one needs. It decides whether unlimited is viable at this price.</span></li>
+    <li><span><b>Call attach rate.</b> One call is included, so it is the largest cost line in the model.</span></li>
+    <li><span><b>Regulatory position.</b> DHA and DoH licensing for the call, and where guidance ends and a regulated medical device begins.</span></li>
+    <li><span><b>Renewal.</b> The whole model rests on it, and we have no evidence yet. It is what the founding cohort is for.</span></li>
+  </ul>
+  <span class="num">12</span>
+</section>
+
+<!-- ============ 13. CLOSE ============ -->
+<section class="slide dark s-close">
+  <div class="lockup" style="margin-bottom:40px">
+    <span class="mark"><svg><use href="#i-mark"/></svg></span>
+    <span><b>Bedside</b><span>Children's health</span></span>
+  </div>
+  <p class="anchorq">“Tell us what’s happening. We’ll tell you what it means.”</p>
+  <p class="sub" style="margin-top:30px;font-size:19px;text-align:center;max-width:56ch">Bedside is guidance, not a diagnosis. It does not replace a doctor who can see your child.</p>
+</section>
+
+</body>
+</html>
