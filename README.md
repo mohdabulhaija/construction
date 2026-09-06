@@ -73,18 +73,25 @@ Two gates before anything is posted, both noted in the kit: a paediatrician sign
 
 ## Arabic campaign posts
 
-`campaign-ar/` holds three Instagram posts at 1080x1350, designed Arabic-first (RTL, Eastern Arabic numerals, IBM Plex Sans Arabic throughout).
+`campaign-ar/` holds five Instagram artboards at 1080x1350, designed Arabic-first: RTL, Eastern Arabic numerals, IBM Plex Sans Arabic, and hand-drawn SVG illustration on each.
 
-They run as a sequence, not three standalone posts: recognition, then proof, then the offer.
+Acute illness, running as a sequence:
 
-1. `01-recognition.png` — the 11pm question. Dark, quiet, no product.
-2. `02-thresholds.png` — four things to check. The saveable one.
-3. `03-offer.png` — why parents wait, and the AED 399 answer.
+1. `01-recognition.png` - the 11pm question, over a night scene. No product.
+2. `02-thresholds.png` - four things to check, one icon each. The saveable one.
+3. `03-offer.png` - why parents wait, and the AED 399 answer.
 
-`posts-ar.html` is the source. To re-render after editing:
+Developmental screening:
 
-```
-node shot_posts.js   # writes bedside-ar-post{1,2,3}.png at 1080x1350
-```
+4. `04-development.png` - "wait and see is not a plan", with a joint-attention drawing.
+5. `05-screening-report.png` - the screening report on a phone.
 
-Copy addresses mothers in the second person, matching the primary buyer. Switching to masculine or neutral is a small edit per line and is flagged in the handover notes.
+`posts-ar.html` is the source; `render.js` writes all five PNGs.
+
+### Two things that are deliberate
+
+**Direction is set on `.post`, not on the document.** An earlier version put `dir="rtl"` on `<html>`, so the posts silently lost RTL when embedded in a gallery page. Keeping direction on the artboard makes each one self-contained.
+
+**The screening report's fourth section is not "when to worry".** For acute illness that framing is right: there are thresholds, and crossing one means act. Developmental concern has no such line, and "when to worry" would push parents toward exactly the anxiety the product exists to reduce. The fourth section is "what this does not mean" instead.
+
+Screening is not diagnosis, and every asset says so. Autism diagnosis needs a multidisciplinary team; a screener only answers whether specialist assessment is worth starting now. The point of the product here is to displace "wait and see", which delays intervention during the years when it helps most.
